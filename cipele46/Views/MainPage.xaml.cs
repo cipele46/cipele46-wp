@@ -67,7 +67,7 @@ namespace cipele46
 
         private void MyAdsAppBarButton_Click(object sender, EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/MyAdsPage.xaml", UriKind.Relative));
+            NavigationService.Navigate(new Uri("/Views/LoginPage.xaml", UriKind.Relative));
         }
     }
 }
