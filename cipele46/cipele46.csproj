@@ -225,7 +225,6 @@
     <Content Include="Icons\appbar.feature.search.rest.png" />
     <Content Include="Icons\appbar.feature.settings.rest.png" />
     <Content Include="Icons\appbar.manage.rest.png" />
-    <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
