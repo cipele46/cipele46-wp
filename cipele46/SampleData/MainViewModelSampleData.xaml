@@ -5,6 +5,8 @@
     xmlns:model="clr-namespace:cipele46.Model"
     IsDataLoading="True">
     <local:MainViewModel.Ads>
-        <local:AdViewModel ImageUrl="https://www.google.hr/images/srpr/logo4w.png" />
+        <local:AdViewModel ImageUrl="https://www.google.hr/images/srpr/logo4w.png"
+                           Title="Ovdje ide naslov"
+                           Description="A ovdje ide opis oglasa" />
     </local:MainViewModel.Ads>
 </local:MainViewModel>
