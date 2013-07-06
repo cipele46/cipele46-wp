@@ -132,7 +132,28 @@ namespace cipele46.Views
                 newStream.Write(byteData, 0, byteData.Length);
                 newStream.Close();
 
-                var response = await request.GetResponseAsync();
+                var response = await request.GetResponseAsync() as HttpWebResponse;
+                if (response.StatusCode == HttpStatusCode.Created)
+                {
+                    var user = new Model.user
+                    {
+                        name = NameTextBox.Text,
+                        password = PasswordTextBox.Password,
+                        email = EmailTextBox.Text
+                    };
+
+                    ((App)Application.Current).User = user;
+
+                    // try logging in immediately
+                    request = HttpWebRequest.CreateHttp("http://cipele46.org/users/show.json");
+                    request.Method = "GET";
+                    request.Accept = "application/json";
+                    request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", user.email, user.password)));
+                    response = await request.GetResponseAsync() as HttpWebResponse;
+                    if (response.StatusCode == HttpStatusCode.OK)
+                        MessageBox.Show("Uspješno ste kreirali korisnički račun");
+                }
+
                 if (RegisterAppBarButton != null)
                     RegisterAppBarButton.IsEnabled = true;
                 IsBusy = false;

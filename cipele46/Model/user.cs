@@ -8,6 +8,7 @@ namespace cipele46.Model
     public class user
     {
         public String email;
-        public String name;        
+        public String name;
+        public string password;
     }
 }

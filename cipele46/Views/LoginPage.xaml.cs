@@ -21,8 +21,20 @@ namespace cipele46.Views
         }
 
         private void LoginPage_Loaded(object sender, RoutedEventArgs e)
-        {            
+        {
             NavigationContext.QueryString.TryGetValue("successUri", out successUri);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            var user = ((App)App.Current).User;
+            if (user != null)
+            {
+                EmailTextBox.Text = user.email;
+                PasswordTextBox.Password = user.password;
+            }
         }
 
         private void fbSigninButton_Click(object sender, RoutedEventArgs e)
@@ -49,10 +61,10 @@ namespace cipele46.Views
             {
                 //TODO login
                 if (!String.IsNullOrWhiteSpace(successUri))
-                {                    
+                {
                     NavigationService.Navigate(new Uri(successUri, UriKind.Relative));
                     Dispatcher.BeginInvoke(() =>
-                    {                        
+                    {
                         NavigationService.RemoveBackEntry();
                     });
                 }
