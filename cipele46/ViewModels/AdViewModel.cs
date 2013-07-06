@@ -15,7 +15,30 @@ namespace cipele46.ViewModels
 
         public string Title { get { return _model.title; } }
         public string Description { get { return _model.description; } }
-        public string ImageUrl { get { return _model.imageUrl; } }
+
+        public string ImageUrl
+        {
+            get
+            {
+                if (_model.image != null &&
+                    _model.image.medium != null)
+                    return _model.image.medium.url;
+
+                return null;
+            }
+        }
+
+        public string LargeImageUrl
+        {
+            get
+            {
+                if (_model.image != null &&
+                    _model.image.mob_large != null)
+                    return _model.image.mob_large.url;
+
+                return null;
+            }
+        }
 
         public BitmapImage Image
         {
@@ -24,7 +47,7 @@ namespace cipele46.ViewModels
                 if (_image != null)
                     return _image;
 
-                ImageDownloader.GetImageAsync(_model.imageUrl).ContinueWith(t =>
+                ImageDownloader.GetImageAsync(ImageUrl).ContinueWith(t =>
                     {
                         _image = t.Result;
                         RaisePropertyChanged();
@@ -35,11 +58,29 @@ namespace cipele46.ViewModels
             }
         }
 
+        public BitmapImage LargeImage
+        {
+            get
+            {
+                if (_image != null)
+                    return _image;
+
+                ImageDownloader.GetImageAsync(LargeImageUrl).ContinueWith(t =>
+                {
+                    _image = t.Result;
+                    RaisePropertyChanged();
+                }, TaskScheduler.FromCurrentSynchronizationContext());
+
+                // TODO: return some default image, vNext
+                return ImageDownloader.DefaultImage;
+            }
+        }
+
         public types Type
         {
             get
             {
-                return (types)_model.type;
+                return (types)_model.ad_type;
             }
         }
 
@@ -47,7 +88,7 @@ namespace cipele46.ViewModels
         {
             get
             {
-                var category = App.GetCategoriesAsync().Result.FirstOrDefault(i => i.id == _model.categoryID);
+                var category = App.GetCategoriesAsync().Result.FirstOrDefault(i => i.id == _model.category_id);
                 if (category != null)
                     return category.name;
 
@@ -60,11 +101,12 @@ namespace cipele46.ViewModels
             get
             {
                 var counties = App.GetCountiesAsync().Result;
-                var county = counties.FirstOrDefault(i => i.id == _model.districtID);
                 var city = counties.Where(i => i.cities != null)
                                    .SelectMany(i => i.cities)
-                                   .FirstOrDefault(i => i.id == _model.cityID);
-
+                                   .FirstOrDefault(i => i.id == _model.city_id);
+                var county = counties.FirstOrDefault(i => i.cities != null &&
+                                                        
+                    i.cities.Contains(city));
                 if (county == null && city == null)
                     return ErrorStrings.UnknownCityAndCounty;
 
@@ -98,8 +140,8 @@ namespace cipele46.ViewModels
             }
         }
 
-        public bool IsSupply { get { return _model.type == (int)types.supply; } }
-        public bool IsDemand { get { return _model.type == (int)types.demand; } }
+        public bool IsSupply { get { return _model.ad_type == (int)types.supply; } }
+        public bool IsDemand { get { return _model.ad_type == (int)types.demand; } }
 
         public string Expires
         {

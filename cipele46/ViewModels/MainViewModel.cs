@@ -61,7 +61,7 @@ namespace cipele46.ViewModels
             IsDataLoading = true;
 
             // ensure that categories and counties are loaded along with ads
-            var taskAds = new WebClient().DownloadStringTaskAsync(Endpoints.AdsSampleUrl);
+            var taskAds = new WebClient().DownloadStringTaskAsync(Endpoints.AdsUrl);
             await TaskEx.WhenAll(App.GetCategoriesAsync(),
                                  App.GetCountiesAsync(),
                                  taskAds);

@@ -245,6 +245,7 @@
     <Content Include="Icons\appbar.sendmessage.rest.png" />
     <Content Include="Icons\phone.png" />
     <Content Include="Images\Missing.jpg" />
+    <Resource Include="Images\Missing.jpg" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />

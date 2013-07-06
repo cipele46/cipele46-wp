@@ -65,10 +65,11 @@
                 <Border BorderThickness="0,12,0,0"
                         BorderBrush="{Binding Type,Converter={StaticResource AdTypeToBrushConverter}}">
                     <StackPanel>
-                        <Image Source="{Binding Image}"
+                        <Image Source="{Binding LargeImage}"
                            Margin="0,12,0,0"/>
                         <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
                                Text="{Binding Description}"
+                                   TextWrapping="Wrap"
                                Margin="0,12,0,0" />
 
                         <TextBlock Text="Lokacija" Style="{StaticResource PhoneTextNormalStyle}"
