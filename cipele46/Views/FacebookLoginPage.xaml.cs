@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using Facebook;
 
 namespace cipele46.Views
 {
@@ -20,7 +21,7 @@ namespace cipele46.Views
         private string accessToken;
         private const string ExtendedPermissions = "email";
 
-        //private readonly FacebookClient _fb = new FacebookClient();
+        private readonly FacebookClient _fb = new FacebookClient();
 
         public FacebookLoginPage()
         {
@@ -29,7 +30,22 @@ namespace cipele46.Views
 
         private void webBrowser1_Navigated(object sender, NavigationEventArgs e)
         {
-            
+            FacebookOAuthResult oauthResult;
+            if (!_fb.TryParseOAuthCallbackUrl(e.Uri, out oauthResult))
+            {
+                return;
+            }
+
+            if (oauthResult.IsSuccess)
+            {
+                accessToken = oauthResult.AccessToken;
+                LoginSucceded(accessToken);
+            }
+            else
+            {
+                // user cancelled
+                MessageBox.Show(oauthResult.ErrorDescription);
+            }
         }
 
         private void webBrowser1_Loaded(object sender, RoutedEventArgs e)
@@ -54,8 +70,42 @@ namespace cipele46.Views
                 parameters["scope"] = extendedPermissions;
             }
 
-            //return _fb.GetLoginUrl(parameters);
-            return null;
+            return _fb.GetLoginUrl(parameters);            
+        }
+
+        private void LoginSucceded(string accessToken)
+        {
+            loadingControl.Visibility = Visibility.Visible;
+            webBrowser1.Visibility = Visibility.Collapsed;
+
+            // logout from facebook web control
+            var parameters = new Dictionary<string, object>();
+            parameters["access_token"] = accessToken;
+            parameters["next"] = "https://www.facebook.com/connect/login_success.html";
+            var logoutUrl = _fb.GetLogoutUrl(parameters);
+            var webBrowserLogout = new WebBrowser();
+            webBrowserLogout.Navigated += (o, args) =>
+            {
+            };
+            webBrowserLogout.Navigate(logoutUrl);
+
+            var fb = new FacebookClient(accessToken);
+
+            fb.GetCompleted += (o, e) =>
+            {
+                if (e.Error != null)
+                {
+                    Dispatcher.BeginInvoke(() => MessageBox.Show(e.Error.Message));
+                    return;
+                }
+
+                var result = (IDictionary<string, object>)e.GetResultData();
+                userId = (string)result["id"];
+                email = (string)result["email"];
+                fullName = (string)result["name"];
+            };
+
+            fb.GetAsync("me");
         }
     }
 }

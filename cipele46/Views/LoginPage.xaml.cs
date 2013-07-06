@@ -19,7 +19,7 @@ namespace cipele46.Views
 
         private void fbSigninButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            NavigationService.Navigate(new Uri("/Views/FacebookLoginPage.xaml", UriKind.Relative));
         }
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
