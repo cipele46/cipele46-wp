@@ -61,7 +61,8 @@
                                      ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                      ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
                                      ItemTemplate="{StaticResource AdTemplate}"
-                                     SelectionChanged="ListBox_SelectionChanged" />
+                                     SelectionChanged="ListBox_SelectionChanged"
+                                     x:Name="lbAll" />
                         </StackPanel>
                     </controls:PanoramaItem>
                 </Grid>
@@ -73,7 +74,8 @@
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                  ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
                                  ItemTemplate="{StaticResource AdTemplate}"
-                                 SelectionChanged="ListBox_SelectionChanged" />
+                                 SelectionChanged="ListBox_SelectionChanged"
+                                 x:Name="lbSupply" />
                     </controls:PanoramaItem>
                 </Grid>
             </ScrollViewer>
@@ -84,7 +86,8 @@
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                  ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
                                  ItemTemplate="{StaticResource AdTemplate}"
-                                 SelectionChanged="ListBox_SelectionChanged" />
+                                 SelectionChanged="ListBox_SelectionChanged"
+                                 x:Name="lbDemand"/>
                     </controls:PanoramaItem>
                 </Grid>
             </ScrollViewer>

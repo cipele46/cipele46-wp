@@ -27,34 +27,44 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
-            <TextBlock Text="Ime" Grid.Row="0" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-            <TextBox x:Name="NameTextBox" Grid.Row="1"></TextBox>
-            <TextBlock Text="E-mail" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-            <TextBox x:Name="EmailTextBox" Grid.Row="3"></TextBox>
-            <TextBlock Text="Telefon" Grid.Row="4" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-            <TextBox x:Name="PhoneTextBox" Grid.Row="5"></TextBox>
-            <TextBlock Text="Lozinka" Grid.Row="6" Margin="12,48,12,0" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-            <PasswordBox x:Name="PasswordTextBox" Grid.Row="7"></PasswordBox>
-            <TextBlock Text="Lozinka ponovno" Grid.Row="8" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-            <PasswordBox x:Name="ConfirmPasswordTextBox" Grid.Row="9"></PasswordBox>
-        </Grid>
+        <ScrollViewer>
+            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Ime" Grid.Row="0" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                <TextBox x:Name="NameTextBox" Grid.Row="1"
+                     KeyDown="TextBox_KeyDown"></TextBox>
+
+                <TextBlock Text="E-mail" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                <TextBox x:Name="EmailTextBox" Grid.Row="3"></TextBox>
+
+                <TextBlock Text="Telefon" Grid.Row="4" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                <TextBox x:Name="PhoneTextBox" Grid.Row="5"></TextBox>
+
+                <TextBlock Text="Lozinka" Grid.Row="6" Margin="12,48,12,0" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                <PasswordBox x:Name="PasswordTextBox" Grid.Row="7"></PasswordBox>
+
+                <TextBlock Text="Lozinka ponovno" Grid.Row="8" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                <PasswordBox x:Name="ConfirmPasswordTextBox" Grid.Row="9"></PasswordBox>
+            </Grid>
+        </ScrollViewer>
     </Grid>
+
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="RegisterAppBarButton" Click="RegisterAppBarButton_Click" IconUri="/Icons/appbar.check.rest.png" Text="ok"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
+
 </phone:PhoneApplicationPage>

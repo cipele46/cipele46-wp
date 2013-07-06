@@ -19,6 +19,30 @@ namespace cipele46.Views
 
         private void RegisterAppBarButton_Click(object sender, EventArgs e)
         {
+            TryCreate();
+        }
+
+        private void TextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Enter)
+            {
+                if (sender == NameTextBox)
+                    EmailTextBox.Focus();
+                else if (sender == EmailTextBox)
+                    PhoneTextBox.Focus();
+                else if (sender == PhoneTextBox)
+                    PasswordTextBox.Focus();
+                else if (sender == PasswordTextBox)
+                    ConfirmPasswordTextBox.Focus();
+                else if (sender == ConfirmPasswordTextBox)
+                {
+                    TryCreate();
+                }
+            }
+        }
+
+        private void TryCreate()
+        {
             String email = EmailTextBox.Text;
             String name = NameTextBox.Text;
             String phone = PhoneTextBox.Text;

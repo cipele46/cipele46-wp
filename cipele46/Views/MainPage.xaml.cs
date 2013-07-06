@@ -44,6 +44,10 @@ namespace cipele46
 
             String filterText = "Kategorija: " + ((App)Application.Current).CategoryFilter.name + "\nŽupanija: " + ((App)Application.Current).CountyFilter.name;
             FilterTextBlock.Text = filterText;
+
+            lbAll.SelectedItem = null;
+            lbSupply.SelectedItem = null;
+            lbDemand.SelectedItem = null;
         }
 
         private void FilterAppBarButton_Click(object sender, EventArgs e)

@@ -46,8 +46,6 @@ namespace cipele46.ViewModels
         {
             Categories = new ObservableCollection<category>();
             Counties = new ObservableCollection<county>();
-            CategoryFilter = ((App)Application.Current).CategoryFilter;
-            CountyFilter = ((App)Application.Current).CountyFilter;
         }
 
         public async Task LoadDataAsync()
@@ -61,6 +59,9 @@ namespace cipele46.ViewModels
 
             foreach (var county in await App.GetCountiesAsync())
                 Counties.Add(county);
+
+            CategoryFilter = Categories.FirstOrDefault(i => i != null && i.id == ((App)Application.Current).CategoryFilter.id);
+            CountyFilter = Counties.FirstOrDefault(i => i != null && i.id == ((App)Application.Current).CountyFilter.id);
 
             IsDataLoading = false;
             IsDataLoaded = true;
