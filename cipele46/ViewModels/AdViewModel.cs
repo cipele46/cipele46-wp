@@ -59,9 +59,11 @@ namespace cipele46.ViewModels
         {
             get
             {
-                var county = App.GetCountiesAsync().Result.FirstOrDefault(i => i.id == _model.districtID);
-                var city = App.GetCountiesAsync().Result.SelectMany(i => i.cities)
-                    .FirstOrDefault(i => i.id == _model.cityID);
+                var counties = App.GetCountiesAsync().Result;
+                var county = counties.FirstOrDefault(i => i.id == _model.districtID);
+                var city = counties.Where(i => i.cities != null)
+                                   .SelectMany(i => i.cities)
+                                   .FirstOrDefault(i => i.id == _model.cityID);
 
                 if (county == null && city == null)
                     return ErrorStrings.UnknownCityAndCounty;
