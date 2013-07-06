@@ -60,7 +60,7 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton x:Name="AddAppBarButton" Click="AddAppBarButton_Click" IconUri="/Icons/appbar.add.rest.png" Text="dodaj novi"/>
+            <shell:ApplicationBarIconButton x:Name="AddAppBarButton" Click="AddAppBarButton_Click" IconUri="/Icons/appbar.add.rest.png" Text="dodaj"/>
             <shell:ApplicationBarIconButton x:Name="SettingsAppBarButton" Click="SettingsAppBarButton_Click" IconUri="/Icons/appbar.feature.settings.rest.png" Text="postavke"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

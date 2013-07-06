@@ -53,27 +53,29 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="1">
+            <Grid x:Name="ContentPanel" Margin="12,0,12,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
             
-            <TextBlock Text="Ime" Grid.Row="0" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-            <TextBox x:Name="NameTextBox" Grid.Row="1"></TextBox>
-            <TextBlock Text="Prezime" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-            <TextBox x:Name="SurnameTextBox" Grid.Row="3"></TextBox>
-            <TextBlock Text="Telefon" Grid.Row="4" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-            <TextBox x:Name="PhoneTextBox" Grid.Row="5"></TextBox>
-            <Button Content="Promijeni lozinku" Grid.Row="6" Click="ChangePasswordButton_Click"></Button>
-            <Button Content="Odjavi se" Grid.Row="7" Click="SignOutButton_Click"></Button>
-        </Grid>
+                <TextBlock Text="Ime" Grid.Row="0" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                <TextBox x:Name="NameTextBox" Grid.Row="1"></TextBox>
+                <TextBlock Text="Prezime" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                <TextBox x:Name="SurnameTextBox" Grid.Row="3"></TextBox>
+                <TextBlock Text="Telefon" Grid.Row="4" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                <TextBox x:Name="PhoneTextBox" Grid.Row="5"></TextBox>
+                <Button Content="Promijeni lozinku" Grid.Row="6" Click="ChangePasswordButton_Click"></Button>
+                <Button Content="Odjavi se" Grid.Row="7" Click="SignOutButton_Click"></Button>
+            </Grid>
+        </ScrollViewer>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
