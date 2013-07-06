@@ -70,6 +70,17 @@
                         <TextBlock Text="{Binding name}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
                     </StackPanel>
                 </DataTemplate>
+
+                <DataTemplate x:Name="CountyPickerItemTemplate">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding name}" Margin="0"/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate x:Name="CountyPickerFullModeItemTemplate">
+                    <StackPanel Orientation="Horizontal" Margin="-12,12">
+                        <TextBlock Text="{Binding name}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                    </StackPanel>
+                </DataTemplate>
             </Grid.Resources>
             
             <Grid.RowDefinitions>
@@ -95,6 +106,8 @@
                         Grid.Row="3"
                         x:Name="CountyPicker"
                         ItemsSource="{Binding Counties}"
+                        ItemTemplate="{StaticResource CountyPickerItemTemplate}"    
+                        FullModeItemTemplate="{StaticResource CountyPickerFullModeItemTemplate}" 
                         SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"                        
                         FullModeHeader="Županija" CacheMode="BitmapCache" />
         </Grid>

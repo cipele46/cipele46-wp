@@ -25,10 +25,12 @@ namespace cipele46.ViewModels
         }
 
         public ObservableCollection<category> Categories { get; set; }
+        public ObservableCollection<county> Counties { get; set; }
 
         public FilterViewModel()
         {
             Categories = new ObservableCollection<category>();
+            Counties = new ObservableCollection<county>();
         }
 
         public async Task LoadDataAsync()
@@ -39,6 +41,9 @@ namespace cipele46.ViewModels
 
             foreach (var category in await App.GetCategoriesAsync())
                 Categories.Add(category);
+
+            foreach (var county in await App.GetCountiesAsync())
+                Counties.Add(county);
 
             IsDataLoading = false;
             IsDataLoaded = true;
