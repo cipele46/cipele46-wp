@@ -1,4 +1,5 @@
 ﻿using cipele46.Model;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
 namespace cipele46.ViewModels
@@ -23,7 +24,7 @@ namespace cipele46.ViewModels
                     {
                         _image = t.Result;
                         RaisePropertyChanged();
-                    });
+                    }, TaskScheduler.FromCurrentSynchronizationContext());
 
                 // TODO: return some default image, vNext
                 return _image;

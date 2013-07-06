@@ -43,7 +43,9 @@ namespace cipele46.ViewModels
 
             var data = await new WebClient().DownloadStringTaskAsync(Endpoints.AdsSampleUrl);
             foreach (var ad in await JsonConvertEx.DeserializeObjectAsync<ad[]>(data))
+            {
                 Ads.Add(new AdViewModel(ad));
+            }
 
             IsDataLoading = false;
             IsDataLoaded = true;
