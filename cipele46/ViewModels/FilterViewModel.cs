@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace cipele46.ViewModels
 {
@@ -12,6 +13,8 @@ namespace cipele46.ViewModels
     {
         private bool _isDataLoading;
         private bool _isDataLoaded;
+        private county _countyFilter;
+        private category _categoryFilter;
 
         public bool IsDataLoading
         {
@@ -24,6 +27,18 @@ namespace cipele46.ViewModels
             set { Set(ref _isDataLoaded, value); }
         }
 
+        public county CountyFilter
+        {
+            get { return _countyFilter; }
+            set { Set(ref _countyFilter, value); }
+        }
+
+        public category CategoryFilter
+        {
+            get { return _categoryFilter; }
+            set { Set(ref _categoryFilter, value); }
+        }
+
         public ObservableCollection<category> Categories { get; set; }
         public ObservableCollection<county> Counties { get; set; }
 
@@ -31,6 +46,8 @@ namespace cipele46.ViewModels
         {
             Categories = new ObservableCollection<category>();
             Counties = new ObservableCollection<county>();
+            CategoryFilter = ((App)Application.Current).CategoryFilter;
+            CountyFilter = ((App)Application.Current).CountyFilter;
         }
 
         public async Task LoadDataAsync()

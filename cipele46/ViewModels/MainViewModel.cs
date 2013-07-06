@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using System.Windows;
+using System;
 
 namespace cipele46.ViewModels
 {
@@ -25,7 +27,7 @@ namespace cipele46.ViewModels
         {
             get { return _isDataLoaded; }
             set { Set(ref _isDataLoaded, value); }
-        }
+        }        
 
         public ObservableCollection<AdViewModel> Ads
         {

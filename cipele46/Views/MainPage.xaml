@@ -55,27 +55,42 @@
             <controls:Panorama.Background>
                 <ImageBrush ImageSource="PanoramaBackground.png"/>
             </controls:Panorama.Background>
-
-            <controls:PanoramaItem Header="oglasi">
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Ads}"
-                         ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
-                         ItemTemplate="{StaticResource AdTemplate}"
-                         SelectionChanged="ListBox_SelectionChanged" />
-            </controls:PanoramaItem>
-
-            <controls:PanoramaItem Header="ponuda">
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding DemandAds}"
-                         ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
-                         ItemTemplate="{StaticResource AdTemplate}"
-                         SelectionChanged="ListBox_SelectionChanged" />
-            </controls:PanoramaItem>
-
-            <controls:PanoramaItem Header="potražnja">
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding SupplyAds}"
-                         ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
-                         ItemTemplate="{StaticResource AdTemplate}"
-                         SelectionChanged="ListBox_SelectionChanged" />
-            </controls:PanoramaItem>
+            <ScrollViewer>
+                <Grid>
+                    <controls:PanoramaItem Header="oglasi">
+                        <StackPanel>
+                            <TextBlock x:Name="FilterTextBlock" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,-24,12,12"></TextBlock>
+                            <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Ads}"
+                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                     ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
+                                     ItemTemplate="{StaticResource AdTemplate}"
+                                     SelectionChanged="ListBox_SelectionChanged" />
+                        </StackPanel>
+                    </controls:PanoramaItem>
+                </Grid>
+            </ScrollViewer>
+            <ScrollViewer>
+                <Grid>
+                    <controls:PanoramaItem Header="ponuda">
+                        <ListBox Margin="0,0,-12,0" ItemsSource="{Binding DemandAds}"
+                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                 ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
+                                 ItemTemplate="{StaticResource AdTemplate}"
+                                 SelectionChanged="ListBox_SelectionChanged" />
+                    </controls:PanoramaItem>
+                </Grid>
+            </ScrollViewer>
+            <ScrollViewer>
+                <Grid>
+                    <controls:PanoramaItem Header="potražnja">
+                        <ListBox Margin="0,0,-12,0" ItemsSource="{Binding SupplyAds}"
+                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                 ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
+                                 ItemTemplate="{StaticResource AdTemplate}"
+                                 SelectionChanged="ListBox_SelectionChanged" />
+                    </controls:PanoramaItem>
+                </Grid>
+            </ScrollViewer>
         </controls:Panorama>
     </Grid>
     

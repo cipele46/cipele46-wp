@@ -38,6 +38,14 @@ namespace cipele46
             }
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            String filterText = "Kategorija: " + ((App)Application.Current).CategoryFilter.name + "\nŽupanija: " + ((App)Application.Current).CountyFilter.name;
+            FilterTextBlock.Text = filterText;
+        }
+
         private void FilterAppBarButton_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/Views/FiltersPage.xaml", UriKind.Relative));
@@ -68,14 +76,14 @@ namespace cipele46
 
         private void MyAdsAppBarButton_Click(object sender, EventArgs e)
         {
-            //if (((App)Application.Current).User == null)
-            //{
+            if (((App)Application.Current).User == null)
+            {
                 NavigationService.Navigate(new Uri("/Views/LoginPage.xaml", UriKind.Relative));
-            //}
-            //else
-            //{
-            //    NavigationService.Navigate(new Uri("/Views/MyAdsPage.xaml", UriKind.Relative));
-            //}
+            }
+            else
+            {
+                NavigationService.Navigate(new Uri("/Views/MyAdsPage.xaml", UriKind.Relative));
+            }
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
