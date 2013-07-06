@@ -25,5 +25,10 @@ namespace cipele46.Views
             NavigationContext.QueryString.TryGetValue("searchKeyword", out searchKeyword);
             MessageBox.Show(searchKeyword);
         }
+
+        private void SearchAppBarButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
