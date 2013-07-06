@@ -18,7 +18,7 @@
                 BorderBrush="{Binding Type,Converter={StaticResource AdTypeToBrushConverter}}"
                 BorderThickness="0,10,0,0"
                 Background="#333">
-            <Grid Margin="0,12,0,0">
+            <Grid Margin="0,12">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
