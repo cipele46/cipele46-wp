@@ -11,7 +11,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    d:DataContext="{d:DesignData Source=../SampleData/DetailsViewModelSampleData.xaml}">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -21,14 +22,80 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel Grid.Row="0" Margin="12,17,0,0">
             <TextBlock Text="CIPELE 46" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="{Binding Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding WarningMessage}"
+                        Visibility="{Binding HasWarningMessage,Converter={StaticResource BooleanToVisibilityConverter}}" 
+                        Foreground="Red"
+                       Margin="12,12,0,0"
+                        Style="{StaticResource PhoneTextSubtleStyle}"/>
+            <TextBlock Text="{Binding Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"
+                       TextWrapping="Wrap" />
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1">
+            <ScrollViewer Margin="25,12,25,0">
+                <Border BorderThickness="0,12,0,0"
+                        BorderBrush="{Binding Type,Converter={StaticResource AdTypeToBrushConverter}}">
+                    <StackPanel>
+                        <Image Source="{Binding Image}"
+                           Margin="0,12,0,0"/>
+                        <TextBlock Style="{StaticResource PhoneTextNormalStyle}"
+                               Text="{Binding Description}"
+                               Margin="0,12,0,0" />
 
+                        <TextBlock Text="Lokacija" Style="{StaticResource PhoneTextNormalStyle}"
+                               Margin="0,24,0,0" />
+                        <TextBlock Foreground="{StaticResource PhoneAccentBrush}"
+                               Style="{StaticResource PhoneTextLargeStyle}"
+                                   Margin="0,0,0,0"
+                               Text="{Binding Location}" />
+
+                        <TextBlock Text="Kategorija" Style="{StaticResource PhoneTextNormalStyle}"
+                               Margin="0,24,0,0" />
+                        <TextBlock Foreground="{StaticResource PhoneAccentBrush}"
+                               Style="{StaticResource PhoneTextLargeStyle}"
+                                   Margin="0,0,0,0"
+                               Text="{Binding Category}" />
+
+                        <TextBlock Text="Ističe za" Style="{StaticResource PhoneTextNormalStyle}"
+                               Margin="0,24,0,0" />
+                        <TextBlock Foreground="{StaticResource PhoneAccentBrush}"
+                               Style="{StaticResource PhoneTextLargeStyle}"
+                                   Margin="0,0,0,0"
+                               Text="{Binding Expires}" />
+
+                        <TextBlock Text="Nazovi" Style="{StaticResource PhoneTextNormalStyle}"
+                                   Margin="0,24,0,0"
+                                   Visibility="{Binding HasPhone,Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        <Button Template="{StaticResource SkinlessButton}"
+                                   Visibility="{Binding HasPhone,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Command="{Binding CallPhoneCommand}">
+                            <Button.Content>
+                                <TextBlock Foreground="{StaticResource PhoneAccentBrush}"
+                                           Style="{StaticResource PhoneTextLargeStyle}"
+                                           Margin="0,0,0,0"
+                                           Text="{Binding Phone}" />
+                            </Button.Content>
+                        </Button>
+
+                        <TextBlock Text="Pošalji upit" Style="{StaticResource PhoneTextNormalStyle}"
+                                   Margin="0,24,0,0"
+                                   Visibility="{Binding HasMail,Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        <Button Template="{StaticResource SkinlessButton}"
+                                   Visibility="{Binding HasMail,Converter={StaticResource BooleanToVisibilityConverter}}"
+                                Command="{Binding SendMessageCommand}">
+                            <Button.Content>
+                                <TextBlock  Foreground="{StaticResource PhoneAccentBrush}"
+                                            Style="{StaticResource PhoneTextLargeStyle}"
+                                            Margin="0,0,0,0"
+                                            Text="{Binding Mail}" />
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </Border>
+            </ScrollViewer>
         </Grid>
     </Grid>
 

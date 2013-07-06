@@ -92,7 +92,7 @@ namespace cipele46
             if (item == null)
                 return;
 
-            App.SelectedItem = item;
+            App.SelectedAd = item;
             NavigationService.Navigate(new Uri("/Views/DetailsPage.xaml", UriKind.Relative));
         }
     }
