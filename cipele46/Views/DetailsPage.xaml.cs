@@ -1,6 +1,8 @@
 ﻿using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using System;
+using cipele46.Model;
+using System.Windows;
 
 namespace cipele46.Views
 {
@@ -21,12 +23,38 @@ namespace cipele46.Views
 
         private void MessageAppBarButton_Click(object sender, System.EventArgs e)
         {
-            NavigationService.Navigate(new Uri("/Views/SendMessagePage.xaml", UriKind.Relative));
+            user user = ((App)Application.Current).User;
+            Uri sendMessageUri = new Uri("/Views/SendMessagePage.xaml", UriKind.Relative);
+            if (user == null)
+            {
+                MessageBoxResult result = MessageBox.Show("Za slanje poruke potrebna je prijava", "Prijavite se", MessageBoxButton.OKCancel);
+                if (result.Equals(MessageBoxResult.OK))
+                {
+                    
+                    NavigationService.Navigate(new Uri(String.Format("/Views/LoginPage.xaml?successUri={0}", sendMessageUri.OriginalString), UriKind.Relative));
+                }               
+            }
+            else
+            {
+                NavigationService.Navigate(sendMessageUri);
+            }
         }
 
         private void FavoriteAppBarButton_Click(object sender, System.EventArgs e)
         {
-
+            user user = ((App)Application.Current).User;
+            if (user == null)
+            {
+                MessageBoxResult result = MessageBox.Show("Za dodavanje oglasa u favorite potrebno se prijaviti", "Prijavite se", MessageBoxButton.OKCancel);
+                if (result.Equals(MessageBoxResult.OK))
+                {
+                    NavigationService.Navigate(new Uri("/Views/LoginPage.xaml", UriKind.Relative));
+                }
+            }
+            else
+            {
+                
+            }
         }
     }
 }

@@ -56,7 +56,7 @@
                 <Grid>
                     <controls:PanoramaItem Header="oglasi">
                         <StackPanel>
-                            <TextBlock x:Name="FilterTextBlock" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,-24,12,12"></TextBlock>
+                            <TextBlock x:Name="FilterTextBlock" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,-24,12,12" MouseLeftButtonDown="FilterTextBlock_MouseLeftButtonDown"></TextBlock>
                             <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Ads}"
                                      ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                      ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
