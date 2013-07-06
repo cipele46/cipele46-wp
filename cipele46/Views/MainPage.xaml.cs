@@ -62,8 +62,7 @@ namespace cipele46
                 return;
             }
             String searchKeyword = ((InputPrompt)sender).Value;
-            NavigationContext.QueryString.Add("searchKeyword", searchKeyword);
-            NavigationService.Navigate(new Uri("/Views/SearchPage.xaml"));
+            NavigationService.Navigate(new Uri(string.Format("/Views/SearchPage.xaml?searchKeyword={0}", searchKeyword), UriKind.Relative));
         }
 
         private void MyAdsAppBarButton_Click(object sender, EventArgs e)
