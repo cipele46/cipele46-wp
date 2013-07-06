@@ -9,5 +9,6 @@
         public static readonly string PasswordEmpty = "Molimo unesite lozinku";
         public static readonly string NameEmpty = "Molimo unesite svoje korisničko ime";
         public static readonly string ConfirmPasswordWrong = "Lozinka i potvrda lozinke ne odgovaraju. Molimo unesite ponovno";
+        public static readonly string MessageEmpty = "Molimo unesite tekst poruke";
     }
 }

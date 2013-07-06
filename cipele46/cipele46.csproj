@@ -155,6 +155,9 @@
     <Compile Include="Views\SearchPage.xaml.cs">
       <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\SendMessagePage.xaml.cs">
+      <DependentUpon>SendMessagePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -219,6 +222,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SendMessagePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +242,8 @@
     <Content Include="ApplicationIcon.png" />
     <Content Include="Background.png" />
     <Content Include="Icons\appbar.myads.icon.png" />
+    <Content Include="Icons\appbar.sendmessage.rest.png" />
+    <Content Include="Icons\phone.png" />
     <Content Include="Images\Missing.jpg" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />

@@ -91,38 +91,16 @@
                                Style="{StaticResource PhoneTextLargeStyle}"
                                    Margin="0,0,0,0"
                                Text="{Binding Expires}" />
-
-                        <TextBlock Text="Nazovi" Style="{StaticResource PhoneTextNormalStyle}"
-                                   Margin="0,24,0,0"
-                                   Visibility="{Binding HasPhone,Converter={StaticResource BooleanToVisibilityConverter}}" />
-                        <Button Template="{StaticResource SkinlessButton}"
-                                   Visibility="{Binding HasPhone,Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Command="{Binding CallPhoneCommand}">
-                            <Button.Content>
-                                <TextBlock Foreground="{StaticResource PhoneAccentBrush}"
-                                           Style="{StaticResource PhoneTextLargeStyle}"
-                                           Margin="0,0,0,0"
-                                           Text="{Binding Phone}" />
-                            </Button.Content>
-                        </Button>
-
-                        <TextBlock Text="Pošalji upit" Style="{StaticResource PhoneTextNormalStyle}"
-                                   Margin="0,24,0,0"
-                                   Visibility="{Binding HasMail,Converter={StaticResource BooleanToVisibilityConverter}}" />
-                        <Button Template="{StaticResource SkinlessButton}"
-                                   Visibility="{Binding HasMail,Converter={StaticResource BooleanToVisibilityConverter}}"
-                                Command="{Binding SendMessageCommand}">
-                            <Button.Content>
-                                <TextBlock  Foreground="{StaticResource PhoneAccentBrush}"
-                                            Style="{StaticResource PhoneTextLargeStyle}"
-                                            Margin="0,0,0,0"
-                                            Text="{Binding Mail}" />
-                            </Button.Content>
-                        </Button>
                     </StackPanel>
                 </Border>
             </ScrollViewer>
         </Grid>
     </Grid>
-
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="CallAppBarButton" Click="CallAppBarButton_Click" IconUri="/Icons/phone.png" Text="nazovi"/>
+            <shell:ApplicationBarIconButton x:Name="MessageAppBarButton" Click="MessageAppBarButton_Click" IconUri="/Icons/appbar.feature.email.rest.png" Text="poruka"/>
+            <shell:ApplicationBarIconButton x:Name="FavoriteAppBarButton" Click="FavoriteAppBarButton_Click" IconUri="/Icons/appbar.favs.addto.rest.png" Text="favorit"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
