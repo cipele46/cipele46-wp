@@ -100,5 +100,10 @@ namespace cipele46
             App.SelectedAd = item;
             NavigationService.Navigate(new Uri("/Views/DetailsPage.xaml", UriKind.Relative));
         }
+
+        private void FilterTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            FilterAppBarButton_Click(sender, e);
+        }
     }
 }
