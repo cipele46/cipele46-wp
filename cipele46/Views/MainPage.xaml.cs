@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Coding4Fun.Toolkit.Controls;
 using cipele46.ViewModels;
+using System.Text;
 
 namespace cipele46
 {
@@ -78,7 +79,7 @@ namespace cipele46
             NavigationService.Navigate(new Uri(string.Format("/Views/SearchPage.xaml?searchKeyword={0}", searchKeyword), UriKind.Relative));
         }
 
-        private void MyAdsAppBarButton_Click(object sender, EventArgs e)
+        private async void MyAdsAppBarButton_Click(object sender, EventArgs e)
         {
             Uri myAdsPageUri = new Uri("/Views/MyAdsPage.xaml", UriKind.Relative);
             if (((App)Application.Current).User == null)
@@ -87,7 +88,21 @@ namespace cipele46
             }
             else
             {
-                NavigationService.Navigate(myAdsPageUri);
+                var user = ((App)Application.Current).User;
+                // try logging in immediately
+                var request = HttpWebRequest.CreateHttp("http://cipele46.org/users/show.json");
+                request.Method = "GET";
+                request.Accept = "application/json";
+                request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", user.email, user.password)));
+                var response = await request.GetResponseAsync() as HttpWebResponse;
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                    NavigationService.Navigate(myAdsPageUri);
+                else
+                {
+                    MessageBox.Show("Neispravan mail ili lozinka");
+                    NavigationService.Navigate(new Uri(String.Format("/Views/LoginPage.xaml?successUri={0}", myAdsPageUri.OriginalString), UriKind.Relative));
+                }
             }
         }
 
