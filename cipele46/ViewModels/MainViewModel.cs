@@ -9,9 +9,12 @@ namespace cipele46.ViewModels
 {
     public class MainViewModel : ViewModelBaseEx
     {
-        private ObservableCollection<AdViewModel> _ads;
         private bool _isDataLoading;
         private bool _isDataLoaded;
+
+        private ObservableCollection<AdViewModel> _ads;
+        private ObservableCollection<AdViewModel> _supplyAds;
+        private ObservableCollection<AdViewModel> _demandAds;
 
         public bool IsDataLoading
         {
@@ -30,9 +33,23 @@ namespace cipele46.ViewModels
             set { Set(ref _ads, value); }
         }
 
+        public ObservableCollection<AdViewModel> SupplyAds
+        {
+            get { return _supplyAds; }
+            set { Set(ref _supplyAds, value); }
+        }
+
+        public ObservableCollection<AdViewModel> DemandAds
+        {
+            get { return _demandAds; }
+            set { Set(ref _demandAds, value); }
+        }
+
         public MainViewModel()
         {
             _ads = new ObservableCollection<AdViewModel>();
+            _supplyAds = new ObservableCollection<AdViewModel>();
+            _demandAds = new ObservableCollection<AdViewModel>();
         }
 
         internal async Task LoadDataAsync()
@@ -41,11 +58,21 @@ namespace cipele46.ViewModels
                 return;
             IsDataLoading = true;
 
-            var data = await new WebClient().DownloadStringTaskAsync(Endpoints.AdsSampleUrl);
+            // ensure that categories and counties are loaded along with ads
+            var taskAds = new WebClient().DownloadStringTaskAsync(Endpoints.AdsSampleUrl);
+            await TaskEx.WhenAll(App.GetCategoriesAsync(),
+                                 App.GetCountiesAsync(),
+                                 taskAds);
+
+            // .Result is fine also
+            var data = await taskAds;
             foreach (var ad in await JsonConvertEx.DeserializeObjectAsync<ad[]>(data))
             {
                 Ads.Add(new AdViewModel(ad));
             }
+
+            SupplyAds.AddRange(Ads.Where(i => i.Type == types.supply));
+            DemandAds.AddRange(Ads.Where(i => i.Type == types.demand));
 
             IsDataLoading = false;
             IsDataLoaded = true;

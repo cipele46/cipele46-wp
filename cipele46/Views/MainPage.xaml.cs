@@ -11,6 +11,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Coding4Fun.Toolkit.Controls;
+using cipele46.ViewModels;
 
 namespace cipele46
 {
@@ -75,6 +76,16 @@ namespace cipele46
             //{
             //    NavigationService.Navigate(new Uri("/Views/MyAdsPage.xaml", UriKind.Relative));
             //}
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = (sender as ListBox).SelectedItem as AdViewModel;
+            if (item == null)
+                return;
+
+            App.SelectedItem = item;
+            NavigationService.Navigate(new Uri("/Views/DetailsPage.xaml", UriKind.Relative));
         }
     }
 }

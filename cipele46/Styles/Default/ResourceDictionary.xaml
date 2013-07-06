@@ -4,7 +4,7 @@
     xmlns:converters="clr-namespace:cipele46.Converters">
 
     <converters:InvertBoolConverter x:Key="InvertBoolConverter" />
-    
+
     <Style TargetType="ListBoxItem" x:Key="StretchListBoxItemStyle">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
     </Style>
@@ -15,17 +15,17 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
 
-            <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"
-                       Grid.Column="1"/>
-            <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"
-                       Grid.Column="1"
-                       Grid.Row="1"/>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="{Binding Title}" TextWrapping="NoWrap"
+                               Margin="12,-8,12,0"
+                               Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+
+                <TextBlock Text="{Binding Category}" TextWrapping="Wrap" Margin="12,12,12,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+                <TextBlock Text="{Binding Location}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" />
+
+            </StackPanel>
 
             <Image Source="{Binding Image}" Width="98" Height="98"
                    Grid.RowSpan="3"

@@ -1,4 +1,5 @@
 ﻿using cipele46.Model;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 
@@ -27,7 +28,47 @@ namespace cipele46.ViewModels
                 //    }, TaskScheduler.FromCurrentSynchronizationContext());
 
                 // TODO: return some default image, vNext
-                return _image;
+                return ImageDownloader.DefaultImage;
+            }
+        }
+
+        public types Type
+        {
+            get
+            {
+                return (types)_model.type;
+            }
+        }
+
+        public string Category
+        {
+            get
+            {
+                var category = App.GetCategoriesAsync().Result.FirstOrDefault(i => i.id == _model.categoryID);
+                if (category != null)
+                    return category.name;
+
+                return ErrorStrings.UnknownCategory;
+            }
+        }
+
+        public string Location
+        {
+            get
+            {
+                var county = App.GetCountiesAsync().Result.FirstOrDefault(i => i.id == _model.districtID);
+                var city = App.GetCountiesAsync().Result.SelectMany(i => i.cities)
+                    .FirstOrDefault(i => i.id == _model.cityID);
+                
+                if (county == null && city == null)
+                    return ErrorStrings.UnknownCityAndCounty;
+
+                if (county == null)
+                    return city.name;
+                if (city == null)
+                    return string.Format(ErrorStrings.UnknownCity, county);
+
+                return string.Format("{0}, {1}", county.name, city.name);
             }
         }
 

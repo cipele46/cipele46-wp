@@ -94,6 +94,8 @@ namespace cipele46
             }
         }
 
+        public static AdViewModel SelectedItem { get; set; }
+
         /// <summary>
         /// Provides easy access to the root frame of the Phone Application.
         /// </summary>
