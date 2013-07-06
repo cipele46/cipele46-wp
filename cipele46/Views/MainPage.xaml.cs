@@ -43,6 +43,11 @@ namespace cipele46
         {
             base.OnNavigatedTo(e);
 
+            while (NavigationService.CanGoBack)
+            {
+                NavigationService.RemoveBackEntry();
+            }
+
             String filterText = "Kategorija: " + ((App)Application.Current).CategoryFilter.name + "\nŽupanija: " + ((App)Application.Current).CountyFilter.name;
             FilterTextBlock.Text = filterText;
 
