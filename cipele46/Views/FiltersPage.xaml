@@ -55,6 +55,28 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <TextBlock Text="Kategorija" Grid.Row="0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+            <toolkit:ListPicker 
+                        Grid.Row="1"
+                        x:Name="CategoriesPicker"
+                        ItemsSource="{Binding Categories}"
+                        SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"                        
+                        FullModeHeader="Kategorija" CacheMode="BitmapCache" />
+            
+            <TextBlock Text="Županija" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}"/>
+            <toolkit:ListPicker 
+                        Grid.Row="3"
+                        x:Name="CountyPicker"
+                        ItemsSource="{Binding Counties}"
+                        SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"                        
+                        FullModeHeader="Županija" CacheMode="BitmapCache" />
         </Grid>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
