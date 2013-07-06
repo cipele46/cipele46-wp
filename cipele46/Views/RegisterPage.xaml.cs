@@ -1,20 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using Microsoft.Phone.Controls;
+using Newtonsoft.Json;
+using System;
+using System.ComponentModel;
 using System.Net;
+using System.Runtime.CompilerServices;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 
 namespace cipele46.Views
 {
-    public partial class RegisterPage : PhoneApplicationPage
+    public partial class RegisterPage : PhoneApplicationPage, INotifyPropertyChanged
     {
+        private bool _isBusy;
+
+        public bool IsBusy
+        {
+            get { return _isBusy; }
+            set
+            {
+                if (_isBusy == value) return;
+                _isBusy = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public RegisterPage()
         {
             InitializeComponent();
+
+            DataContext = this;
+
+#if DEBUG
+            NameTextBox.Text = "Testni user" + new Random().Next();
+
+            EmailTextBox.Text = new Random().Next().ToString() + "user@gigimail.com";
+            PhoneTextBox.Text = "0981234567";
+
+            PasswordTextBox.Password = "sifra111";
+            ConfirmPasswordTextBox.Password = "sifra111";
+#endif
         }
 
         private void RegisterAppBarButton_Click(object sender, EventArgs e)
@@ -41,8 +66,12 @@ namespace cipele46.Views
             }
         }
 
-        private void TryCreate()
+        private async Task TryCreate()
         {
+            if (RegisterAppBarButton != null)
+                RegisterAppBarButton.IsEnabled = false;
+            IsBusy = true;
+
             String email = EmailTextBox.Text;
             String name = NameTextBox.Text;
             String phone = PhoneTextBox.Text;
@@ -71,8 +100,66 @@ namespace cipele46.Views
             }
             else
             {
+                // try it!
+                // curl -v
+                // -H "Accept: application/json"
+                // -H "Content-type: application/json"
+                // -X POST
+                // -d ' {"user":{"first_name":"firstname","last_name":"lastname","email":"emai333331231233l@email.com","password":"app123","password_confirmation":"app123"}}'
+                // http://cipele46.org/users.json
 
+                var request = WebRequest.CreateHttp("http://cipele46.org/users.json");
+                request.Method = "POST";
+                request.ContentType = "application/json";
+                request.Accept = "application/json";
+
+                var data = JsonConvert.SerializeObject(new registration_info
+                {
+                    user = new user
+                    {
+                        //first_name = "firstname",
+                        //last_name = "lastname",
+                        email = EmailTextBox.Text,
+                        password = PasswordTextBox.Password,
+                        password_confirmation = ConfirmPasswordTextBox.Password
+                    }
+                });
+                byte[] byteData = Encoding.UTF8.GetBytes(data);
+
+                // Prepare web request...
+                var newStream = await request.GetRequestStreamAsync();
+                // Send the data.
+                newStream.Write(byteData, 0, byteData.Length);
+                newStream.Close();
+
+                var response = await request.GetResponseAsync();
+                if (RegisterAppBarButton != null)
+                    RegisterAppBarButton.IsEnabled = true;
+                IsBusy = false;
             }
+        }
+
+        public class user
+        {
+            public string first_name { get; set; }
+            public string last_name { get; set; }
+            public string email { get; set; }
+            public string password { get; set; }
+            public string password_confirmation { get; set; }
+        }
+
+        public class registration_info
+        {
+            public user user { get; set; }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
