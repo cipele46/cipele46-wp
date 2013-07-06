@@ -22,7 +22,7 @@ namespace cipele46.Views
             String email = EmailTextBox.Text;
             if (String.IsNullOrWhiteSpace(email))
             {
-                MessageBox.Show("Molimo unesite svoj e-mail");
+                MessageBox.Show(ErrorStrings.EmailEmpty);
             }
             else
             {

@@ -27,9 +27,14 @@ namespace cipele46.Views
             String email = EmailTextBox.Text;
             String password = PasswordTextBox.Password;
 
-            if (String.IsNullOrWhiteSpace(email) || String.IsNullOrWhiteSpace(password))
+            if (String.IsNullOrWhiteSpace(email))
             {
-                MessageBox.Show("Molimo upišite svoj email i lozinku");
+                MessageBox.Show(ErrorStrings.EmailEmpty);
+                return;
+            }
+            else if (String.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show(ErrorStrings.PasswordEmpty);
                 return;
             }
             else
@@ -45,7 +50,7 @@ namespace cipele46.Views
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Views/RegisterPage.xaml", UriKind.Relative));
         }
     }
 }
