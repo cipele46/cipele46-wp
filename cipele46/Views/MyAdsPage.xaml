@@ -16,18 +16,27 @@
 
     <!--LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot">
-        <controls:Panorama Title="my application">
+        <controls:Panorama Title="cipele 46">
 
-            <!--Panorama item one-->
-            <controls:PanoramaItem Header="item1">
+            <controls:PanoramaItem Header="favoriti">
                 <Grid/>
             </controls:PanoramaItem>
 
-            <!--Panorama item two-->
-            <controls:PanoramaItem Header="item2">
+            <controls:PanoramaItem Header="aktivni">
+                <Grid/>
+            </controls:PanoramaItem>
+
+            <controls:PanoramaItem Header="zatvoreni">
                 <Grid/>
             </controls:PanoramaItem>
         </controls:Panorama>
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="AddAppBarButton" Click="AddAppBarButton_Click" IconUri="/Icons/appbar.add.rest.png" Text="dodaj novi"/>
+            <shell:ApplicationBarIconButton x:Name="SettingsAppBarButton" Click="SettingsAppBarButton_Click" IconUri="/Icons/appbar.feature.settings.rest.png" Text="postavke"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>
