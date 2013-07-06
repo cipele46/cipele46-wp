@@ -113,8 +113,8 @@
     <Compile Include="Model\category.cs" />
     <Compile Include="Model\city.cs" />
     <Compile Include="Model\county.cs" />
-    <Compile Include="ObservableCollectionExtensions.cs" />
     <Compile Include="Model\user.cs" />
+    <Compile Include="ObservableCollectionExtensions.cs" />
     <Compile Include="ViewModels\AdViewModel.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -130,6 +130,9 @@
     </Compile>
     <Compile Include="Views\FiltersPage.xaml.cs">
       <DependentUpon>FiltersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ForgotPasswordPage.xaml.cs">
+      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -166,13 +169,16 @@
     </Page>
     <Page Include="Views\DetailsPage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FacebookLoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FiltersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ForgotPasswordPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -216,7 +222,6 @@
     <Content Include="ApplicationIcon.png" />
     <Content Include="Background.png" />
     <Content Include="Icons\appbar.myads.icon.png" />
-    <Resource Include="Images\Missing.jpg" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
