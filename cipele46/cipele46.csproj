@@ -149,6 +149,9 @@
     <Compile Include="Views\NewAdPage.xaml.cs">
       <DependentUpon>NewAdPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PostAdSuccessPage.xaml.cs">
+      <DependentUpon>PostAdSuccessPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
@@ -214,6 +217,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PostAdSuccessPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RegisterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -243,6 +250,7 @@
     <Content Include="Background.png" />
     <Content Include="Icons\appbar.myads.icon.png" />
     <Content Include="Icons\appbar.sendmessage.rest.png" />
+    <Content Include="Icons\appbar.share.rest.png" />
     <Content Include="Icons\phone.png" />
     <Resource Include="Images\Missing.jpg" />
     <Content Include="README_FIRST.txt" />

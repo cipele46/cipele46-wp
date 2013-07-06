@@ -20,7 +20,7 @@ namespace cipele46.Views
 
         private void NewAdAppBarButton_Click(object sender, EventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Views/PostAdSuccessPage.xaml", UriKind.Relative));
         }
 
         private void AddImageButton_Click(object sender, RoutedEventArgs e)
