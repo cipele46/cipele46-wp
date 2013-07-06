@@ -15,14 +15,19 @@ namespace cipele46
     {
         #region Shared stuff
 
-        public static List<category> Categories { get; set; }
+        static Task<List<category>> _taskCategories = null;
 
-        public static async Task<List<category>> GetCategoriesAsync()
+        public static Task<List<category>> GetCategoriesAsync()
         {
-            var client = new WebClient();
-            var data = await client.DownloadStringTaskAsync("http://dev.fiveminutes.eu/cipele/api/categories");
-            Categories = (await JsonConvertEx.DeserializeObjectAsync<Model.category[]>(data)).ToList();
-            return Categories;
+            if (_taskCategories != null)
+                return _taskCategories;
+
+            return _taskCategories = TaskEx.Run(async () =>
+                {
+                    var client = new WebClient();
+                    var data = await client.DownloadStringTaskAsync("http://dev.fiveminutes.eu/cipele/api/categories");
+                    return (await JsonConvertEx.DeserializeObjectAsync<Model.category[]>(data)).ToList();
+                });
         }
 
         #endregion
