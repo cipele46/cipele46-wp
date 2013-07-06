@@ -13,6 +13,11 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
+    
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="{Binding IsDataLoading}"
+                                 IsVisible="{Binding IsDataLoading}" />
+    </shell:SystemTray.ProgressIndicator>
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -68,7 +73,19 @@
                         x:Name="CategoriesPicker"
                         ItemsSource="{Binding Categories}"
                         SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"                        
-                        FullModeHeader="Kategorija" CacheMode="BitmapCache" />
+                        FullModeHeader="Kategorija" CacheMode="BitmapCache">
+                <toolkit:ListPicker.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding name}" />
+                    </DataTemplate>
+                </toolkit:ListPicker.ItemTemplate>
+                <toolkit:ListPicker.FullModeItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Style="{StaticResource PhoneTextLargeStyle}"
+                                   Text="{Binding name}" />
+                    </DataTemplate>
+                </toolkit:ListPicker.FullModeItemTemplate>
+            </toolkit:ListPicker>
             
             <TextBlock Text="Županija" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}"/>
             <toolkit:ListPicker 
