@@ -1,7 +1,10 @@
 ﻿using cipele46.Model;
+using Microsoft.Phone.Tasks;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 
 namespace cipele46.ViewModels
 {
@@ -59,7 +62,7 @@ namespace cipele46.ViewModels
                 var county = App.GetCountiesAsync().Result.FirstOrDefault(i => i.id == _model.districtID);
                 var city = App.GetCountiesAsync().Result.SelectMany(i => i.cities)
                     .FirstOrDefault(i => i.id == _model.cityID);
-                
+
                 if (county == null && city == null)
                     return ErrorStrings.UnknownCityAndCounty;
 
@@ -72,9 +75,63 @@ namespace cipele46.ViewModels
             }
         }
 
+        public bool HasWarningMessage
+        {
+            get { return _model.status != (int)status.active; }
+        }
+
+        public string WarningMessage
+        {
+            get
+            {
+                switch (_model.status)
+                {
+                    case (int)status.closed:
+                        return Strings.AdIsClosed;
+                    case (int)status.pending:
+                        return Strings.AdIsPendingAdministratorApproval;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public bool IsSupply { get { return _model.type == (int)types.supply; } }
+        public bool IsDemand { get { return _model.type == (int)types.demand; } }
+
+        public string Expires
+        {
+            get { return "21 dan"; }
+        }
+
+        public string Phone { get { return _model.phone; } }
+        public string Mail { get { return _model.email; } }
+
+        public bool HasPhone { get { return !string.IsNullOrWhiteSpace(_model.phone); } }
+        public bool HasMail { get { return !string.IsNullOrWhiteSpace(_model.email); } }
+
+        public ICommand CallPhoneCommand { get; set; }
+        public ICommand SendMessageCommand { get; set; }
+
         public AdViewModel(ad ad)
         {
             _model = ad;
+
+            CallPhoneCommand = new GalaSoft.MvvmLight.Command.RelayCommand(CallPhone);
+            SendMessageCommand = new GalaSoft.MvvmLight.Command.RelayCommand(SendMessage);
+        }
+
+        void CallPhone()
+        {
+            var task = new PhoneCallTask()
+            {
+                PhoneNumber = _model.phone
+            };
+            task.Show();
+        }
+
+        void SendMessage()
+        {
         }
     }
 }

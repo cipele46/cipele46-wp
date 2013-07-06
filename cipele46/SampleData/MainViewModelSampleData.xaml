@@ -6,7 +6,22 @@
     IsDataLoading="True">
     <local:MainViewModel.Ads>
         <local:AdViewModel Image="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/c21.20.263.263/s160x160/1011142_662422583772451_443961822_n.png"
-                           Title="Ovdje ide naslov"
-                           Description="A ovdje ide opis oglasa" />
+                           Title="Poklanjam starinski namještaj kauč, fotelju i komodu"
+                           Description="A ovdje ide opis oglasa"
+                           Location="Koprivničko-križevačka, Križevci"
+                           Category="Namještaj"
+                           Expires="21 dan"/>
+        <local:AdViewModel Image="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/c21.20.263.263/s160x160/1011142_662422583772451_443961822_n.png"
+                           Title="Poklanjam starinski namještaj kauč, fotelju i komodu"
+                           Description="A ovdje ide opis oglasa"
+                           Location="Koprivničko-križevačka, Križevci"
+                           Category="Namještaj"
+                           Expires="21 dan"/>
+        <local:AdViewModel Image="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/c21.20.263.263/s160x160/1011142_662422583772451_443961822_n.png"
+                           Title="Poklanjam starinski namještaj kauč, fotelju i komodu"
+                           Description="A ovdje ide opis oglasa"
+                           Location="Koprivničko-križevačka, Križevci"
+                           Category="Namještaj"
+                           Expires="21 dan"/>
     </local:MainViewModel.Ads>
 </local:MainViewModel>

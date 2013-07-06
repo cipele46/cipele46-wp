@@ -1,0 +1,12 @@
+﻿<local:AdViewModel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:cipele46.ViewModels"
+    xmlns:model="clr-namespace:cipele46.Model"
+    IsDataLoading="True"
+    Image="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/c21.20.263.263/s160x160/1011142_662422583772451_443961822_n.png"
+    Title="Ovdje ide naslov"
+    Description="A ovdje ide opis oglasa"
+    WarningMessage="Čeka odobranje administratora"
+    HasWarningMessage="True">
+</local:AdViewModel>
