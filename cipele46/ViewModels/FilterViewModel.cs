@@ -37,8 +37,7 @@ namespace cipele46.ViewModels
                 return;
             IsDataLoading = true;
 
-            await App.GetCategoriesAsync();
-            foreach (var category in App.Categories)
+            foreach (var category in await App.GetCategoriesAsync())
                 Categories.Add(category);
 
             IsDataLoading = false;
