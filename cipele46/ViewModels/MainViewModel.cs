@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Net;
 
 namespace cipele46.ViewModels
 {
@@ -9,8 +6,11 @@ namespace cipele46.ViewModels
     {
         public bool IsDataLoaded { get; set; }
 
-        internal void LoadDataAsync()
+        internal async void LoadDataAsync()
         {
+            var client = new WebClient();
+            var data = await client.DownloadStringTaskAsync("http://dev.fiveminutes.eu/cipele/api/categories");
+            var categories = await JsonConvertEx.DeserializeObjectAsync<Model.categories>(data);
         }
     }
 }
