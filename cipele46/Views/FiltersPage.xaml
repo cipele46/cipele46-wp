@@ -87,18 +87,7 @@
                         ItemTemplate="{StaticResource CategoryPickerItemTemplate}"    
                         FullModeItemTemplate="{StaticResource CategoryPickerFullModeItemTemplate}"  
                         SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"                        
-                        FullModeHeader="Kategorija" CacheMode="BitmapCache">
-                <toolkit:ListPicker.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding name}" />
-                    </DataTemplate>
-                </toolkit:ListPicker.ItemTemplate>
-                <toolkit:ListPicker.FullModeItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Style="{StaticResource PhoneTextLargeStyle}"
-                                   Text="{Binding name}" />
-                    </DataTemplate>
-                </toolkit:ListPicker.FullModeItemTemplate>
+                        FullModeHeader="Kategorija" CacheMode="BitmapCache">                
             </toolkit:ListPicker>
             
             <TextBlock Text="Županija" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}"/>
