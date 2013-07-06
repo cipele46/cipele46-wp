@@ -14,7 +14,9 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="True"
+    shell:SystemTray.Opacity=".9">
+
     <shell:SystemTray.ProgressIndicator>
         <shell:ProgressIndicator IsIndeterminate="{Binding IsDataLoading}"
                                  IsVisible="{Binding IsDataLoading}" />
@@ -44,36 +46,38 @@
             </toolkit:NavigationOutTransition.Forward>
         </toolkit:NavigationOutTransition>
     </toolkit:TransitionService.NavigationOutTransition>
-    
+
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
- 
+
         <!--Panorama control-->
         <controls:Panorama Title="cipele 46">
             <controls:Panorama.Background>
                 <ImageBrush ImageSource="PanoramaBackground.png"/>
             </controls:Panorama.Background>
- 
+
             <controls:PanoramaItem Header="oglasi">
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Categories}">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Ads}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Margin="0,0,0,17" Width="432" Height="78">
-                                <TextBlock Text="{Binding id}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                <TextBlock Text="{Binding name}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                <Image Source="{Binding Image}" />
+                                <Image Source="{Binding ImageUrl}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </controls:PanoramaItem>
- 
+
             <controls:PanoramaItem Header="ponuda">
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Categories}">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Ads}">
                 </ListBox>
             </controls:PanoramaItem>
 
             <controls:PanoramaItem Header="potražnja">
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Categories}">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Ads}">
                 </ListBox>
             </controls:PanoramaItem>
         </controls:Panorama>

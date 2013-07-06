@@ -9,7 +9,7 @@ namespace cipele46.ViewModels
 {
     public class MainViewModel : ViewModelBaseEx
     {
-        private ObservableCollection<category> _categories;
+        private ObservableCollection<AdViewModel> _ads;
         private bool _isDataLoading;
         private bool _isDataLoaded;
 
@@ -24,22 +24,26 @@ namespace cipele46.ViewModels
             set { Set(ref _isDataLoaded, value); }
         }
 
-        public ObservableCollection<category> Categories
+        public ObservableCollection<AdViewModel> Ads
         {
-            get { return _categories; }
-            set { Set(ref _categories, value); }
+            get { return _ads; }
+            set { Set(ref _ads, value); }
         }
 
         public MainViewModel()
         {
-            _categories = new ObservableCollection<category>();
+            _ads = new ObservableCollection<AdViewModel>();
         }
 
-        internal void LoadDataAsync()
+        internal async Task LoadDataAsync()
         {
             if (IsDataLoading)
                 return;
             IsDataLoading = true;
+
+            var data = await new WebClient().DownloadStringTaskAsync(Endpoints.AdsSampleUrl);
+            foreach (var ad in await JsonConvertEx.DeserializeObjectAsync<ad[]>(data))
+                Ads.Add(new AdViewModel(ad));
 
             IsDataLoading = false;
             IsDataLoaded = true;

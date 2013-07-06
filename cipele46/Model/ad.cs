@@ -1,7 +1,20 @@
 ﻿
 namespace cipele46.Model
 {
-    class ad
+    public enum types
+    {
+        supply = 1,
+        demand = 2
+    }
+
+    public enum status
+    {
+        pending = 1,
+        active = 2,
+        closed = 3
+    }
+
+    public class ad
     {
         public int cityID { get; set; }
         public string phone { get; set; }

@@ -25,7 +25,7 @@ namespace cipele46
             return _taskCategories = TaskEx.Run(async () =>
                 {
                     var client = new WebClient();
-                    var data = await client.DownloadStringTaskAsync("http://dev.fiveminutes.eu/cipele/api/categories");
+                    var data = await client.DownloadStringTaskAsync(Endpoints.CategoriesUrl);
                     return (await JsonConvertEx.DeserializeObjectAsync<Model.category[]>(data)).ToList();
                 });
         }
