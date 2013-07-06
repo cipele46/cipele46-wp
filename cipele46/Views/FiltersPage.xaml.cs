@@ -15,6 +15,7 @@ namespace cipele46.Views
         public FiltersPage()
         {
             InitializeComponent();
+            DataContext = App.ViewModel;
         }
 
         private void FiltersAppBarButton_Click(object sender, EventArgs e)

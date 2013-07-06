@@ -54,7 +54,19 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
+            <Grid.Resources>
+                <DataTemplate x:Name="CategoryPickerItemTemplate">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding name}" Margin="0"/>
+                    </StackPanel>
+                </DataTemplate>
+                <DataTemplate x:Name="CategoryPickerFullModeItemTemplate">
+                    <StackPanel Orientation="Horizontal" Margin="-12,12">
+                        <TextBlock Text="{Binding name}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                    </StackPanel>
+                </DataTemplate>
+            </Grid.Resources>
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -67,6 +79,8 @@
                         Grid.Row="1"
                         x:Name="CategoriesPicker"
                         ItemsSource="{Binding Categories}"
+                        ItemTemplate="{StaticResource CategoryPickerItemTemplate}"    
+                        FullModeItemTemplate="{StaticResource CategoryPickerFullModeItemTemplate}"  
                         SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"                        
                         FullModeHeader="Kategorija" CacheMode="BitmapCache" />
             
