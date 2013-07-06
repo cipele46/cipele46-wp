@@ -33,5 +33,20 @@ namespace cipele46
                 App.ViewModel.LoadDataAsync();
             }
         }
+
+        private void FilterAppBarButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SearchAppBarButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MyAdsAppBarButton_Click(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/MyAdsPage.xaml", UriKind.Relative));
+        }
     }
 }

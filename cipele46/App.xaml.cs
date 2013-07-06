@@ -49,6 +49,7 @@ namespace cipele46
             // Show graphics profiling information while debugging.
             if (System.Diagnostics.Debugger.IsAttached)
             {
+                MetroGridHelper.IsVisible = true;
                 // Display the current frame rate counters.
                 Application.Current.Host.Settings.EnableFrameRateCounter = true;
 

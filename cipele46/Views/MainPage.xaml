@@ -19,13 +19,13 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
  
         <!--Panorama control-->
-        <controls:Panorama Title="my application">
+        <controls:Panorama Title="cipele 46">
             <controls:Panorama.Background>
                 <ImageBrush ImageSource="PanoramaBackground.png"/>
             </controls:Panorama.Background>
  
             <!--Panorama item one-->
-            <controls:PanoramaItem Header="first item">
+            <controls:PanoramaItem Header="oglasi">
                 <!--Double line list with text wrapping-->
                 <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
                     <ListBox.ItemTemplate>
@@ -41,7 +41,7 @@
  
             <!--Panorama item two-->
             <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
-            <controls:PanoramaItem Header="second item">
+            <controls:PanoramaItem Header="ponuda">
                 <!--Double line list with image placeholder and text wrapping-->
                 <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
                     <ListBox.ItemTemplate>
@@ -58,6 +58,33 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </controls:PanoramaItem>
+
+            <!--Panorama item two-->
+            <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
+            <controls:PanoramaItem Header="potražnja">
+                <!--Double line list with image placeholder and text wrapping-->
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
+                                <!--Replace rectangle with image-->
+                                <Rectangle Height="100" Width="100" Fill="#FFE5001b" Margin="12,0,9,0"/>
+                                <StackPanel Width="311">
+                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </controls:PanoramaItem>
         </controls:Panorama>
     </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="FilterAppBarButton" Click="FilterAppBarButton_Click" IconUri="/Icons/appbar.manage.rest.png" Text="filteri"/>
+            <shell:ApplicationBarIconButton x:Name="SearchAppBarButton" Click="SearchAppBarButton_Click" IconUri="/Icons/appbar.feature.search.rest.png" Text="traži"/>
+            <shell:ApplicationBarIconButton x:Name="MyAdsAppBarButton" Click="MyAdsAppBarButton_Click" IconUri="/Icons/appbar.myads.png" Text="moji og"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
