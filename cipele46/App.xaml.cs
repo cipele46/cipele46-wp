@@ -30,6 +30,21 @@ namespace cipele46
                 });
         }
 
+        static Task<List<county>> _taskCounties = null;
+
+        public static Task<List<county>> GetCountiesAsync()
+        {
+            if (_taskCounties != null)
+                return _taskCounties;
+
+            return _taskCounties = TaskEx.Run(async () =>
+            {
+                var client = new WebClient();
+                var data = await client.DownloadStringTaskAsync(Endpoints.CountiesUrl);
+                return (await JsonConvertEx.DeserializeObjectAsync<Model.county[]>(data)).ToList();
+            });
+        }
+
         #endregion
 
         private static MainViewModel viewModel = null;

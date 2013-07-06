@@ -4,7 +4,6 @@
     xmlns:local="clr-namespace:cipele46.ViewModels"
     xmlns:model="clr-namespace:cipele46.Model"
     IsDataLoading="True">
-    <local:MainViewModel.Categories>
-        <model:category id="1" name="Hi" />
-    </local:MainViewModel.Categories>
+    <local:MainViewModel.Ads>
+    </local:MainViewModel.Ads>
 </local:MainViewModel>

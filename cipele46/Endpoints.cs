@@ -7,7 +7,10 @@ namespace cipele46
 {
     public static class Endpoints
     {
-        public static readonly string CategoriesUrl = "http://dev.fiveminutes.eu/cipele/api/categories";
+        // TODO: remove!
         public static readonly string AdsSampleUrl = "http://dev.fiveminutes.eu/cipele/api/ads";
+
+        public static readonly string CategoriesUrl = "http://cipele46.org/categories.json";
+        public static readonly string CountiesUrl = "http://cipele46.org/regions.json";
     }
 }

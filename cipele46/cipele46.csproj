@@ -106,6 +106,8 @@
     <Compile Include="MetroGridHelper.cs" />
     <Compile Include="Model\ad.cs" />
     <Compile Include="Model\category.cs" />
+    <Compile Include="Model\city.cs" />
+    <Compile Include="Model\county.cs" />
     <Compile Include="ViewModels\AdViewModel.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
