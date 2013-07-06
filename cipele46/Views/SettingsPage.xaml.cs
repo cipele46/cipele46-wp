@@ -21,5 +21,10 @@ namespace cipele46.Views
         {
 
         }
+
+        private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/ChangePasswordPage.xaml", UriKind.Relative));
+        }
     }
 }
