@@ -19,5 +19,15 @@ namespace cipele46.Views
         {
             InitializeComponent();
         }
+
+        private void AddAppBarButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SettingsAppBarButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
