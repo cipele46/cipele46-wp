@@ -10,18 +10,24 @@ namespace cipele46.ViewModels
     public class MainViewModel : ViewModelBaseEx
     {
         private ObservableCollection<category> _categories;
+        private bool _isDataLoading;
+        private bool _isDataLoaded;
 
-        public bool IsDataLoading { get; set; }
-        public bool IsDataLoaded { get; set; }
+        public bool IsDataLoading
+        {
+            get { return _isDataLoading; }
+            set { Set(ref _isDataLoading, value); }
+        }
+        public bool IsDataLoaded
+        {
+            get { return _isDataLoaded; }
+            set { Set(ref _isDataLoaded, value); }
+        }
 
         public ObservableCollection<category> Categories
         {
             get { return _categories; }
-            set
-            {
-                _categories = value;
-                Set(ref _categories, value);
-            }
+            set { Set(ref _categories, value); }
         }
 
         public MainViewModel()
