@@ -10,16 +10,18 @@
     </Style>
 
     <DataTemplate x:Key="AdTemplate">
-        <Grid Margin="12,0,12,17" Background="LightBlue">
+        <Grid Margin="12,0,12,17">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="1">
-                <TextBlock Text="{Binding Title}" TextWrapping="NoWrap" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                <TextBlock Text="{Binding Title}" TextWrapping="NoWrap"
+                               Margin="12,-8,12,0"
+                               Style="{StaticResource PhoneTextExtraLargeStyle}" />
                 <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" />
-                
+
                 <TextBlock Text="{Binding Category}" TextWrapping="Wrap" Margin="12,12,12,0" Style="{StaticResource PhoneTextSubtleStyle}" />
                 <TextBlock Text="{Binding Location}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}" />
 

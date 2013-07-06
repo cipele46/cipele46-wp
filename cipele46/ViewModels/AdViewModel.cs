@@ -28,7 +28,7 @@ namespace cipele46.ViewModels
                     }, TaskScheduler.FromCurrentSynchronizationContext());
 
                 // TODO: return some default image, vNext
-                return _image;
+                return ImageDownloader.DefaultImage;
             }
         }
 
