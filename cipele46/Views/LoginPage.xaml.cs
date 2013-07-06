@@ -12,9 +12,17 @@ namespace cipele46.Views
 {
     public partial class LoginPage : PhoneApplicationPage
     {
+        string successUri;
+
         public LoginPage()
         {
             InitializeComponent();
+            this.Loaded += LoginPage_Loaded;
+        }
+
+        private void LoginPage_Loaded(object sender, RoutedEventArgs e)
+        {            
+            NavigationContext.QueryString.TryGetValue("successUri", out successUri);
         }
 
         private void fbSigninButton_Click(object sender, RoutedEventArgs e)
@@ -39,7 +47,19 @@ namespace cipele46.Views
             }
             else
             {
-
+                //TODO login
+                if (!String.IsNullOrWhiteSpace(successUri))
+                {                    
+                    NavigationService.Navigate(new Uri(successUri, UriKind.Relative));
+                    Dispatcher.BeginInvoke(() =>
+                    {                        
+                        NavigationService.RemoveBackEntry();
+                    });
+                }
+                else
+                {
+                    NavigationService.GoBack();
+                }
             }
         }
 

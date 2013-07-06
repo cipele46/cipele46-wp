@@ -80,13 +80,14 @@ namespace cipele46
 
         private void MyAdsAppBarButton_Click(object sender, EventArgs e)
         {
+            Uri myAdsPageUri = new Uri("/Views/MyAdsPage.xaml", UriKind.Relative);
             if (((App)Application.Current).User == null)
             {
-                NavigationService.Navigate(new Uri("/Views/LoginPage.xaml", UriKind.Relative));
+                NavigationService.Navigate(new Uri(String.Format("/Views/LoginPage.xaml?successUri={0}", myAdsPageUri.OriginalString), UriKind.Relative));
             }
             else
             {
-                NavigationService.Navigate(new Uri("/Views/MyAdsPage.xaml", UriKind.Relative));
+                NavigationService.Navigate(myAdsPageUri);
             }
         }
 
