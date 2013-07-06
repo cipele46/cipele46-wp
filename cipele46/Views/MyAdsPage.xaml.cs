@@ -22,12 +22,12 @@ namespace cipele46.Views
 
         private void AddAppBarButton_Click(object sender, EventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Views/NewAdPage.xaml", UriKind.Relative));
         }
 
         private void SettingsAppBarButton_Click(object sender, EventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Views/SettingsPage.xaml", UriKind.Relative));
         }
     }
 }

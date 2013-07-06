@@ -39,7 +39,7 @@ namespace cipele46
 
         private void FilterAppBarButton_Click(object sender, EventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Views/FiltersPage.xaml", UriKind.Relative));
         }
 
         private void SearchAppBarButton_Click(object sender, EventArgs e)
