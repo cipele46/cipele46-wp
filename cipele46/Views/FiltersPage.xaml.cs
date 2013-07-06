@@ -1,6 +1,8 @@
 ﻿using cipele46.ViewModels;
+using cipele46.Model;
 using Microsoft.Phone.Controls;
 using System;
+using System.Windows;
 
 namespace cipele46.Views
 {
@@ -24,7 +26,13 @@ namespace cipele46.Views
 
         private void FiltersAppBarButton_Click(object sender, EventArgs e)
         {
+            category categoryFilter = (category)CategoriesPicker.SelectedItem;
+            county countyFilter = (county)CountyPicker.SelectedItem;
 
+            ((App)Application.Current).CategoryFilter = categoryFilter;
+            ((App)Application.Current).CountyFilter = countyFilter;
+
+            NavigationService.GoBack();
         }
     }
 }

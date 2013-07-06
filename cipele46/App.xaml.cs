@@ -27,7 +27,12 @@ namespace cipele46
                 {
                     var client = new WebClient();
                     var data = await client.DownloadStringTaskAsync(Endpoints.CategoriesUrl);
-                    return (await JsonConvertEx.DeserializeObjectAsync<Model.category[]>(data)).ToList();
+                    List<category> categories = (await JsonConvertEx.DeserializeObjectAsync<Model.category[]>(data)).ToList();
+                    category categoryAll = new category();
+                    categoryAll.name = "Sve kategorije";
+                    categoryAll.id = 0;
+                    categories.Insert(0, categoryAll);
+                    return categories;
                 });
         }
 
@@ -41,8 +46,13 @@ namespace cipele46
             return _taskCounties = TaskEx.Run(async () =>
             {
                 var client = new WebClient();
-                var data = await client.DownloadStringTaskAsync(Endpoints.CountiesUrl);
-                return (await JsonConvertEx.DeserializeObjectAsync<Model.county[]>(data)).ToList();
+                var data = await client.DownloadStringTaskAsync(Endpoints.CountiesUrl);                
+                List<county> counties = (await JsonConvertEx.DeserializeObjectAsync<Model.county[]>(data)).ToList();
+                county countyAll = new county();
+                countyAll.name = "Sve županije";
+                countyAll.id = 0;
+                counties.Insert(0, countyAll);
+                return counties;
             });
         }
 
@@ -75,6 +85,74 @@ namespace cipele46
                 {
                     isoStore.Add("user", value);
                 } 
+            }
+        }
+
+        public county CountyFilter
+        {
+            get
+            {
+                IsolatedStorageSettings isoStore = IsolatedStorageSettings.ApplicationSettings;
+                if (isoStore.Contains("CountyFilter"))
+                {
+                    return (county)isoStore["CountyFilter"];
+                }
+                else
+                {
+                    county countyAll = new county();
+                    countyAll.name = "Sve županije";
+                    countyAll.id = 0;
+                    return countyAll;
+                }
+            }
+            set
+            {
+                if (value != null)
+                {
+                    IsolatedStorageSettings isoStore = IsolatedStorageSettings.ApplicationSettings;
+                    if (isoStore.Contains("CountyFilter"))
+                    {
+                        isoStore["CountyFilter"] = value;
+                    }
+                    else
+                    {
+                        isoStore.Add("CountyFilter", value);
+                    }
+                }
+            }
+        }
+
+        public category CategoryFilter
+        {
+            get
+            {
+                IsolatedStorageSettings isoStore = IsolatedStorageSettings.ApplicationSettings;
+                if (isoStore.Contains("CategoryFilter"))
+                {
+                    return (category)isoStore["CategoryFilter"];
+                }
+                else
+                {
+                    category categoryAll = new category();
+                    categoryAll.name = "Sve kategorije";
+                    categoryAll.id = 0;
+                    return categoryAll;
+                }
+            }
+            set
+            {
+                if (value != null)
+                {
+                    IsolatedStorageSettings isoStore = IsolatedStorageSettings.ApplicationSettings;
+                    if (isoStore.Contains("CategoryFilter"))
+                    {
+                        isoStore["CategoryFilter"] = value;
+                    }
+                    else
+                    {
+                        isoStore.Add("CategoryFilter", value);
+                    }
+                }
             }
         }
 

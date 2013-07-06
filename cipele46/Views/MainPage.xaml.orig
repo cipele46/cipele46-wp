@@ -52,6 +52,31 @@
 
         <!--Panorama control-->
         <controls:Panorama Title="cipele 46">
+<<<<<<< HEAD
+            <controls:PanoramaItem Header="oglasi">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Ads}"
+                         ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
+                         ItemTemplate="{StaticResource AdTemplate}"
+                         SelectionChanged="ListBox_SelectionChanged" />
+            </controls:PanoramaItem>
+
+            <controls:PanoramaItem Header="ponuda">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding DemandAds}"
+                         ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
+                         ItemTemplate="{StaticResource AdTemplate}"
+                         SelectionChanged="ListBox_SelectionChanged" />
+            </controls:PanoramaItem>
+
+            <controls:PanoramaItem Header="potražnja">
+                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding SupplyAds}"
+                         ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
+                         ItemTemplate="{StaticResource AdTemplate}"
+                         SelectionChanged="ListBox_SelectionChanged" />
+            </controls:PanoramaItem>
+=======
+            <controls:Panorama.Background>
+                <ImageBrush ImageSource="PanoramaBackground.png"/>
+            </controls:Panorama.Background>
             <ScrollViewer>
                 <Grid>
                     <controls:PanoramaItem Header="oglasi">
@@ -88,6 +113,7 @@
                     </controls:PanoramaItem>
                 </Grid>
             </ScrollViewer>
+>>>>>>> 448ee8467c37b6bb8993f40beaac5205e1064ada
         </controls:Panorama>
     </Grid>
     

@@ -97,7 +97,7 @@
                         ItemsSource="{Binding Categories}"
                         ItemTemplate="{StaticResource CategoryPickerItemTemplate}"    
                         FullModeItemTemplate="{StaticResource CategoryPickerFullModeItemTemplate}"  
-                        SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"                        
+                        SelectedItem="{Binding CategoryFilter}"
                         FullModeHeader="Kategorija" CacheMode="BitmapCache">                
             </toolkit:ListPicker>
             
@@ -108,7 +108,7 @@
                         ItemsSource="{Binding Counties}"
                         ItemTemplate="{StaticResource CountyPickerItemTemplate}"    
                         FullModeItemTemplate="{StaticResource CountyPickerFullModeItemTemplate}" 
-                        SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"                        
+                        SelectedItem="{Binding CountyFilter}"
                         FullModeHeader="Županija" CacheMode="BitmapCache" />
         </Grid>
     </Grid>
