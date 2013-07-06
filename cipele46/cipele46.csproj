@@ -103,7 +103,6 @@
     <Compile Include="JsonConvertEx.cs" />
     <Compile Include="MetroGridHelper.cs" />
     <Compile Include="Model\category.cs" />
-    <Compile Include="Model\categories.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBaseEx.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
