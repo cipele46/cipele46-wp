@@ -1,6 +1,11 @@
-﻿using cipele46.ViewModels;
+﻿using cipele46.Model;
+using cipele46.ViewModels;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
 
@@ -8,6 +13,20 @@ namespace cipele46
 {
     public partial class App : Application
     {
+        #region Shared stuff
+
+        public static List<category> Categories { get; set; }
+
+        public static async Task<List<category>> GetCategoriesAsync()
+        {
+            var client = new WebClient();
+            var data = await client.DownloadStringTaskAsync("http://dev.fiveminutes.eu/cipele/api/categories");
+            Categories = (await JsonConvertEx.DeserializeObjectAsync<Model.category[]>(data)).ToList();
+            return Categories;
+        }
+
+        #endregion
+
         private static MainViewModel viewModel = null;
 
         /// <summary>

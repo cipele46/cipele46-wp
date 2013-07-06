@@ -1,15 +1,15 @@
 ﻿using cipele46.Model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace cipele46.ViewModels
 {
-    public class MainViewModel : ViewModelBaseEx
+    public class FilterViewModel : ViewModelBaseEx
     {
-        private ObservableCollection<category> _categories;
         private bool _isDataLoading;
         private bool _isDataLoaded;
 
@@ -24,22 +24,22 @@ namespace cipele46.ViewModels
             set { Set(ref _isDataLoaded, value); }
         }
 
-        public ObservableCollection<category> Categories
+        public ObservableCollection<category> Categories { get; set; }
+
+        public FilterViewModel()
         {
-            get { return _categories; }
-            set { Set(ref _categories, value); }
+            Categories = new ObservableCollection<category>();
         }
 
-        public MainViewModel()
-        {
-            _categories = new ObservableCollection<category>();
-        }
-
-        internal void LoadDataAsync()
+        public async Task LoadDataAsync()
         {
             if (IsDataLoading)
                 return;
             IsDataLoading = true;
+
+            await App.GetCategoriesAsync();
+            foreach (var category in App.Categories)
+                Categories.Add(category);
 
             IsDataLoading = false;
             IsDataLoaded = true;

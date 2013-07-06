@@ -103,6 +103,7 @@
     <Compile Include="JsonConvertEx.cs" />
     <Compile Include="MetroGridHelper.cs" />
     <Compile Include="Model\category.cs" />
+    <Compile Include="ViewModels\FilterViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBaseEx.cs" />
     <Compile Include="Views\ChangePasswordPage.xaml.cs">
