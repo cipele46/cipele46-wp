@@ -20,11 +20,11 @@ namespace cipele46.ViewModels
                 if (_image != null)
                     return _image;
 
-                ImageDownloader.GetImageAsync(_model.imageUrl).ContinueWith(t =>
-                    {
-                        _image = t.Result;
-                        RaisePropertyChanged();
-                    }, TaskScheduler.FromCurrentSynchronizationContext());
+                //ImageDownloader.GetImageAsync(_model.imageUrl).ContinueWith(t =>
+                //    {
+                //        _image = t.Result;
+                //        RaisePropertyChanged();
+                //    }, TaskScheduler.FromCurrentSynchronizationContext());
 
                 // TODO: return some default image, vNext
                 return _image;

@@ -24,12 +24,23 @@ namespace cipele46.Views
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
+            String email = EmailTextBox.Text;
+            String password = PasswordTextBox.Password;
 
+            if (String.IsNullOrWhiteSpace(email) || String.IsNullOrWhiteSpace(password))
+            {
+                MessageBox.Show("Molimo upišite svoj email i lozinku");
+                return;
+            }
+            else
+            {
+
+            }
         }
 
         private void ForgotPasswordButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new Uri("/Views/ForgotPasswordPage.xaml", UriKind.Relative));
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
