@@ -3,6 +3,7 @@ using cipele46.ViewModels;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -48,6 +49,34 @@ namespace cipele46
         #endregion
 
         private static MainViewModel viewModel = null;
+
+        public user User
+        {
+            get
+            {
+                IsolatedStorageSettings isoStore = IsolatedStorageSettings.ApplicationSettings;
+                if (isoStore.Contains("user"))
+                {
+                    return (user)isoStore["user"];
+                }
+                else
+                {
+                    return null;
+                }               
+            }
+            set
+            {
+                IsolatedStorageSettings isoStore = IsolatedStorageSettings.ApplicationSettings;
+                if (isoStore.Contains("user"))
+                {
+                    isoStore["user"] = value;
+                }
+                else
+                {
+                    isoStore.Add("user", value);
+                } 
+            }
+        }
 
         /// <summary>
         /// A static ViewModel used by the views to bind against.

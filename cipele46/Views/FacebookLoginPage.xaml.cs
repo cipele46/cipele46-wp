@@ -8,13 +8,14 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Facebook;
+using cipele46.Model;
 
 namespace cipele46.Views
 {
     public partial class FacebookLoginPage : PhoneApplicationPage
     {
-        private const string appId = "168791636471880";
-        private const string appSecret = "0395a67c9aa847a756daa8535917e805";
+        private const string appId = "187448291422507";
+        private const string appSecret = "1cc29696449f87708eae7223dbe074e4";
         private string userId;
         private string email;
         private string fullName;
@@ -75,8 +76,8 @@ namespace cipele46.Views
 
         private void LoginSucceded(string accessToken)
         {
-            loadingControl.Visibility = Visibility.Visible;
-            webBrowser1.Visibility = Visibility.Collapsed;
+            //loadingControl.Visibility = Visibility.Visible;
+            //webBrowser1.Visibility = Visibility.Collapsed;
 
             // logout from facebook web control
             var parameters = new Dictionary<string, object>();
@@ -103,9 +104,22 @@ namespace cipele46.Views
                 userId = (string)result["id"];
                 email = (string)result["email"];
                 fullName = (string)result["name"];
+
+                loginToServer();
             };
 
             fb.GetAsync("me");
+        }
+
+        private void loginToServer()
+        {
+            ((App)Application.Current).User = new user();
+            Dispatcher.BeginInvoke(() =>
+            {                
+                NavigationService.Navigate(new Uri("/Views/MyAdsPage.xaml", UriKind.Relative));
+                NavigationService.RemoveBackEntry();
+            });
+            
         }
     }
 }

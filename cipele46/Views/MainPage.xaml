@@ -91,7 +91,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="FilterAppBarButton" Click="FilterAppBarButton_Click" IconUri="/Icons/appbar.manage.rest.png" Text="filteri"/>
             <shell:ApplicationBarIconButton x:Name="SearchAppBarButton" Click="SearchAppBarButton_Click" IconUri="/Icons/appbar.feature.search.rest.png" Text="traži"/>
-            <shell:ApplicationBarIconButton x:Name="MyAdsAppBarButton" Click="MyAdsAppBarButton_Click" IconUri="/Icons/appbar.myads.png" Text="moji og"/>
+            <shell:ApplicationBarIconButton x:Name="MyAdsAppBarButton" Click="MyAdsAppBarButton_Click" IconUri="/Icons/appbar.myads.icon.png" Text="moji oglasi"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
