@@ -29,7 +29,8 @@ namespace cipele46.Views
 
         private void SignOutButton_Click(object sender, RoutedEventArgs e)
         {
-
+            ((App)Application.Current).User = null;
+            NavigationService.Navigate(new Uri("/Views/MainPage.xaml", UriKind.Relative));
         }
     }
 }
