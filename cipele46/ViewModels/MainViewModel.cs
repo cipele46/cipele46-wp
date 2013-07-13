@@ -60,8 +60,21 @@ namespace cipele46.ViewModels
                 return;
             IsDataLoading = true;
 
+            Ads.Clear();
+            SupplyAds.Clear();
+            DemandAds.Clear();
+
             // ensure that categories and counties are loaded along with ads
-            var taskAds = new WebClient().DownloadStringTaskAsync(Endpoints.AdsUrl);
+            String adsUrl = Endpoints.AdsUrl + "?";
+            if (((App)Application.Current).CategoryFilter.id != 0)
+            {
+                adsUrl += "category_id=" + ((App)Application.Current).CategoryFilter.id + "&";
+            }
+            if (((App)Application.Current).CountyFilter.id != 0)
+            {
+                adsUrl += "region_id=" + ((App)Application.Current).CountyFilter.id;
+            }
+            var taskAds = new WebClient().DownloadStringTaskAsync(adsUrl);
             await TaskEx.WhenAll(App.GetCategoriesAsync(),
                                  App.GetCountiesAsync(),
                                  taskAds);
