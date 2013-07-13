@@ -48,8 +48,8 @@ namespace cipele46
                 NavigationService.RemoveBackEntry();
             }
 
-            String filterText = "Kategorija: " + ((App)Application.Current).CategoryFilter.name + "\nŽupanija: " + ((App)Application.Current).CountyFilter.name;
-            FilterTextBlock.Text = filterText;
+            String filterText = ((App)Application.Current).CategoryFilter.name + "\n" + ((App)Application.Current).CountyFilter.name;
+            FilterTextBlock.Text = FilterTextBlockPonuda.Text = FilterTextBlockPotraznja.Text = filterText;
 
             lbAll.SelectedItem = null;
             lbSupply.SelectedItem = null;
@@ -121,7 +121,7 @@ namespace cipele46
             NavigationService.Navigate(new Uri("/Views/DetailsPage.xaml", UriKind.Relative));
         }
 
-        private void FilterTextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void FilterTextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             FilterAppBarButton_Click(sender, e);
         }

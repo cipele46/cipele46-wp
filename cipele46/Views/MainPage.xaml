@@ -54,9 +54,14 @@
         <controls:Panorama Title="cipele 46">
             <ScrollViewer>
                 <Grid>
-                    <controls:PanoramaItem Header="oglasi">
+                    <controls:PanoramaItem>
+                        <controls:PanoramaItem.Header>
+                            <StackPanel Orientation="Horizontal" Margin="-12,-24,0,0">
+                                <TextBlock Text="oglasi"></TextBlock>
+                                <TextBlock x:Name="FilterTextBlock" Margin="12,30,0,0" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" MouseLeftButtonUp="FilterTextBlock_MouseLeftButtonUp"></TextBlock>
+                            </StackPanel>
+                        </controls:PanoramaItem.Header>
                         <StackPanel>
-                            <TextBlock x:Name="FilterTextBlock" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" Margin="12,-24,12,12" MouseLeftButtonDown="FilterTextBlock_MouseLeftButtonDown"></TextBlock>
                             <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Ads}"
                                      ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                      ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
@@ -69,7 +74,13 @@
             </ScrollViewer>
             <ScrollViewer>
                 <Grid>
-                    <controls:PanoramaItem Header="ponuda">
+                    <controls:PanoramaItem>
+                        <controls:PanoramaItem.Header>
+                            <StackPanel Orientation="Horizontal" Margin="-12,-24,0,0">
+                                <TextBlock Text="ponuda"></TextBlock>
+                                <TextBlock x:Name="FilterTextBlockPonuda" Margin="12,30,0,0" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" MouseLeftButtonUp="FilterTextBlock_MouseLeftButtonUp"></TextBlock>
+                            </StackPanel>
+                        </controls:PanoramaItem.Header>
                         <ListBox Margin="0,0,-12,0" ItemsSource="{Binding DemandAds}"
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                  ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
@@ -81,7 +92,13 @@
             </ScrollViewer>
             <ScrollViewer>
                 <Grid>
-                    <controls:PanoramaItem Header="potražnja">
+                    <controls:PanoramaItem>
+                        <controls:PanoramaItem.Header>
+                            <StackPanel Orientation="Horizontal" Margin="-12,-24,0,0">
+                                <TextBlock Text="potražnja"></TextBlock>
+                                <TextBlock x:Name="FilterTextBlockPotraznja" Margin="12,30,0,0" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" MouseLeftButtonUp="FilterTextBlock_MouseLeftButtonUp"></TextBlock>
+                            </StackPanel>
+                        </controls:PanoramaItem.Header>
                         <ListBox Margin="0,0,-12,0" ItemsSource="{Binding SupplyAds}"
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                  ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
