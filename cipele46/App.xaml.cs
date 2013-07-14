@@ -230,7 +230,7 @@ namespace cipele46
             // Ensure that application state is restored appropriately
             if (!App.ViewModel.IsDataLoaded)
             {
-                App.ViewModel.LoadDataAsync();
+                App.ViewModel.LoadAllAdsAsync();
             }
         }
 

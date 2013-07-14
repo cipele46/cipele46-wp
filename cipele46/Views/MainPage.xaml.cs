@@ -13,6 +13,7 @@ using Microsoft.Phone.Controls;
 using Coding4Fun.Toolkit.Controls;
 using cipele46.ViewModels;
 using System.Text;
+using System.Windows.Navigation;
 
 namespace cipele46
 {
@@ -33,10 +34,7 @@ namespace cipele46
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!App.ViewModel.IsDataLoaded)
-            {
-                App.ViewModel.LoadDataAsync();
-            }
+            
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -46,6 +44,29 @@ namespace cipele46
             while (NavigationService.CanGoBack)
             {
                 NavigationService.RemoveBackEntry();
+            }
+
+            if (!App.ViewModel.IsDataLoaded)
+            {
+                if (e.NavigationMode == NavigationMode.New)
+                {
+                    App.ViewModel.LoadAllAdsAsync();
+                }
+                else
+                {
+                    if (Panorama.SelectedIndex == 0)
+                    {
+                        App.ViewModel.LoadAllAdsAsync();
+                    }
+                    else if (Panorama.SelectedIndex == 1)
+                    {
+                        App.ViewModel.LoadSupplyAdsAsync();
+                    }
+                    else if (Panorama.SelectedIndex == 2)
+                    {
+                        App.ViewModel.LoadDemandAdsAsync();
+                    }
+                }
             }
 
             String filterText = ((App)Application.Current).CategoryFilter.name + "\n" + ((App)Application.Current).CountyFilter.name;
@@ -125,5 +146,58 @@ namespace cipele46
         {
             FilterAppBarButton_Click(sender, e);
         }
+
+        private void AllScrollViewer_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+        {
+            if (((AllScrollViewer.VerticalOffset - e.TotalManipulation.Translation.Y >= AllScrollViewer.ScrollableHeight)
+                 || (AllScrollViewer.VerticalOffset - e.FinalVelocities.LinearVelocity.Y >= AllScrollViewer.ScrollableHeight)))
+            {
+                App.ViewModel.LoadAllAdsAsync();
+            }
+        }
+
+        private void SupplyScrollViewer_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+        {
+            if (((SupplyScrollViewer.VerticalOffset - e.TotalManipulation.Translation.Y >= SupplyScrollViewer.ScrollableHeight)
+                 || (SupplyScrollViewer.VerticalOffset - e.FinalVelocities.LinearVelocity.Y >= SupplyScrollViewer.ScrollableHeight)))
+            {
+                App.ViewModel.LoadSupplyAdsAsync();
+            }
+        }
+
+        private void DemandScrollViewer_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+        {
+            if (((DemandScrollViewer.VerticalOffset - e.TotalManipulation.Translation.Y >= DemandScrollViewer.ScrollableHeight)
+                 || (DemandScrollViewer.VerticalOffset - e.FinalVelocities.LinearVelocity.Y >= DemandScrollViewer.ScrollableHeight)))
+            {
+                App.ViewModel.LoadDemandAdsAsync();
+            }
+        }
+
+        private void Panorama_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Panorama.SelectedIndex == 0)
+            {
+                if (!App.ViewModel.IsAllAdsLoaded)
+                {
+                    App.ViewModel.LoadAllAdsAsync();
+                }
+            }
+            else if (Panorama.SelectedIndex == 1)
+            {
+                if (!App.ViewModel.IsSupplyAdsLoaded)
+                {
+                    App.ViewModel.LoadSupplyAdsAsync();
+                }
+            }
+            else if (Panorama.SelectedIndex == 2)
+            {
+                if (!App.ViewModel.IsDemandAdsLoaded)
+                {
+                    App.ViewModel.LoadDemandAdsAsync();
+                }
+            }
+        }
+        
     }
 }

@@ -11,6 +11,23 @@ namespace cipele46.ViewModels
 {
     public class MainViewModel : ViewModelBaseEx
     {
+        private const int pageSize = 5;
+        private int _allAdsPage = 1;
+        private int _demandAdsPage = 1;
+        private int _supplyAdsPage = 1;
+
+        private bool _hasMoreAllAds = true;
+        private bool _hasMoreDemandAds = true;
+        private bool _hasMoreSupplyAds = true;
+
+        private bool _isAllAdsLoading;
+        private bool _isDemandAdsLoading;
+        private bool _isSupplyAdsLoading;
+
+        private bool _isAllAdsLoaded;
+        private bool _isDemandAdsLoaded;
+        private bool _isSupplyAdsLoaded;
+
         private bool _isDataLoading;
         private bool _isDataLoaded;
 
@@ -27,7 +44,22 @@ namespace cipele46.ViewModels
         {
             get { return _isDataLoaded; }
             set { Set(ref _isDataLoaded, value); }
-        }        
+        }
+        public bool IsAllAdsLoaded
+        {
+            get { return _isAllAdsLoaded; }
+            set { Set(ref _isAllAdsLoaded, value); }
+        }
+        public bool IsDemandAdsLoaded
+        {
+            get { return _isDemandAdsLoaded; }
+            set { Set(ref _isDemandAdsLoaded, value); }
+        }
+        public bool IsSupplyAdsLoaded
+        {
+            get { return _isSupplyAdsLoaded; }
+            set { Set(ref _isSupplyAdsLoaded, value); }
+        } 
 
         public ObservableCollection<AdViewModel> Ads
         {
@@ -54,18 +86,122 @@ namespace cipele46.ViewModels
             _demandAds = new ObservableCollection<AdViewModel>();
         }
 
-        internal async Task LoadDataAsync()
+        public void ClearData()
         {
-            if (IsDataLoading)
-                return;
-            IsDataLoading = true;
-
             Ads.Clear();
             SupplyAds.Clear();
             DemandAds.Clear();
+            _allAdsPage = 1;
+            _demandAdsPage = 1;
+            _supplyAdsPage = 1;
+            _isAllAdsLoaded = false;
+            _isSupplyAdsLoaded = false;
+            _isDemandAdsLoaded = false;
+            _hasMoreAllAds = true;
+            _hasMoreDemandAds = true;
+            _hasMoreSupplyAds = true;
+            IsDataLoaded = false;
+        }
 
-            // ensure that categories and counties are loaded along with ads
-            String adsUrl = Endpoints.AdsUrl + "?";
+        internal async Task LoadAllAdsAsync()
+        {
+            if (_isAllAdsLoading || !_hasMoreAllAds)
+                return;
+            _isAllAdsLoading = true;            
+            IsDataLoading = true;
+            
+            var taskAds = new WebClient().DownloadStringTaskAsync(getAdsUrl(_allAdsPage));
+            await TaskEx.WhenAll(App.GetCategoriesAsync(),
+                                 App.GetCountiesAsync(), 
+                                 taskAds);
+
+            var data = await taskAds;
+            int resultsNumber = 0;
+            foreach (var ad in await JsonConvertEx.DeserializeObjectAsync<ad[]>(data))
+            {
+                ++resultsNumber;
+                Ads.Add(new AdViewModel(ad));
+            }
+
+            if (resultsNumber < pageSize)
+            {
+                _hasMoreAllAds = false;
+            }
+            ++_allAdsPage;
+
+            _isAllAdsLoading = false;
+            _isAllAdsLoaded = true;
+            IsDataLoading = false;
+            IsDataLoaded = true;
+        }
+
+        internal async Task LoadDemandAdsAsync()
+        {
+            if (_isDemandAdsLoading || !_hasMoreDemandAds)
+                return;
+            _isDemandAdsLoading = true;
+            IsDataLoading = true;
+
+            var taskAds = new WebClient().DownloadStringTaskAsync(getAdsUrl(_demandAdsPage) + "&ad_type=2");
+            await TaskEx.WhenAll(App.GetCategoriesAsync(),
+                                 App.GetCountiesAsync(),
+                                 taskAds);
+
+            var data = await taskAds;
+            int resultsNumber = 0;
+            foreach (var ad in await JsonConvertEx.DeserializeObjectAsync<ad[]>(data))
+            {
+                ++resultsNumber;
+                DemandAds.Add(new AdViewModel(ad));
+            }
+
+            if (resultsNumber < pageSize)
+            {
+                _hasMoreDemandAds = false;
+            }
+            ++_demandAdsPage;
+
+            _isDemandAdsLoading = false;
+            _isDemandAdsLoaded = true;
+            IsDataLoading = false;
+            IsDataLoaded = true;
+        }
+
+        internal async Task LoadSupplyAdsAsync()
+        {
+            if (_isSupplyAdsLoading || !_hasMoreSupplyAds)
+                return;
+            _isSupplyAdsLoading = true;
+            IsDataLoading = true;
+
+            var taskAds = new WebClient().DownloadStringTaskAsync(getAdsUrl(_supplyAdsPage) + "&ad_type=1");
+            await TaskEx.WhenAll(App.GetCategoriesAsync(),
+                                 App.GetCountiesAsync(),
+                                 taskAds);
+
+            var data = await taskAds;
+            int resultsNumber = 0;
+            foreach (var ad in await JsonConvertEx.DeserializeObjectAsync<ad[]>(data))
+            {
+                ++resultsNumber;
+                SupplyAds.Add(new AdViewModel(ad));
+            }
+
+            if (resultsNumber < pageSize)
+            {
+                _hasMoreSupplyAds = false;
+            }
+            ++_supplyAdsPage;
+
+            _isSupplyAdsLoading = false;
+            _isSupplyAdsLoaded = true;
+            IsDataLoading = false;
+            IsDataLoaded = true;
+        }
+
+        private String getAdsUrl(int page)
+        {
+            String adsUrl = Endpoints.AdsUrl + "?page=" + page + "&per_page=" + pageSize + "&";
             if (((App)Application.Current).CategoryFilter.id != 0)
             {
                 adsUrl += "category_id=" + ((App)Application.Current).CategoryFilter.id + "&";
@@ -74,23 +210,8 @@ namespace cipele46.ViewModels
             {
                 adsUrl += "region_id=" + ((App)Application.Current).CountyFilter.id;
             }
-            var taskAds = new WebClient().DownloadStringTaskAsync(adsUrl);
-            await TaskEx.WhenAll(App.GetCategoriesAsync(),
-                                 App.GetCountiesAsync(),
-                                 taskAds);
-
-            // .Result is fine also
-            var data = await taskAds;
-            foreach (var ad in await JsonConvertEx.DeserializeObjectAsync<ad[]>(data))
-            {
-                Ads.Add(new AdViewModel(ad));
-            }
-
-            SupplyAds.AddRange(Ads.Where(i => i.Type == types.supply));
-            DemandAds.AddRange(Ads.Where(i => i.Type == types.demand));
-
-            IsDataLoading = false;
-            IsDataLoaded = true;
+            adsUrl += "nocache=" + DateTime.Now.Ticks.ToString();
+            return adsUrl;
         }
     }
 }
