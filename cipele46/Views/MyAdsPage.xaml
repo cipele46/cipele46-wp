@@ -15,6 +15,11 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
 
+    <shell:SystemTray.ProgressIndicator>
+        <shell:ProgressIndicator IsIndeterminate="{Binding IsDataLoading}"
+                                 IsVisible="{Binding IsDataLoading}" />
+    </shell:SystemTray.ProgressIndicator>
+    
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
             <toolkit:NavigationInTransition.Backward>
@@ -42,19 +47,60 @@
     
     <!--LayoutRoot contains the root grid where all other page content is placed-->
     <Grid x:Name="LayoutRoot">
-        <controls:Panorama Title="cipele 46">
-
-            <controls:PanoramaItem Header="favoriti">
-                <Grid/>
-            </controls:PanoramaItem>
-
-            <controls:PanoramaItem Header="aktivni">
-                <Grid/>
-            </controls:PanoramaItem>
-
-            <controls:PanoramaItem Header="zatvoreni">
-                <Grid/>
-            </controls:PanoramaItem>
+        <controls:Panorama Title="cipele 46" x:Name="Panorama">
+            <ScrollViewer x:Name="FavoritesScrollViewer" ManipulationCompleted="FavoritesScrollViewer_ManipulationCompleted">
+                <Grid>
+                    <controls:PanoramaItem>
+                        <controls:PanoramaItem.Header>
+                            <StackPanel Orientation="Horizontal" Margin="-12,-24,0,0">
+                                <TextBlock Text="favoriti"></TextBlock>                                
+                            </StackPanel>
+                        </controls:PanoramaItem.Header>
+                        <StackPanel>
+                            <ListBox Margin="0,0,-12,0" ItemsSource="{Binding FavoriteAds}"
+                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                     ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
+                                     ItemTemplate="{StaticResource AdTemplate}"
+                                     SelectionChanged="favorites_SelectionChanged"
+                                     x:Name="favorites" />
+                        </StackPanel>
+                    </controls:PanoramaItem>
+                </Grid>
+            </ScrollViewer>
+            <ScrollViewer x:Name="ActiveScrollViewer" ManipulationCompleted="ActiveScrollViewer_ManipulationCompleted">
+                <Grid>
+                    <controls:PanoramaItem>
+                        <controls:PanoramaItem.Header>
+                            <StackPanel Orientation="Horizontal" Margin="-12,-24,0,0">
+                                <TextBlock Text="aktivni"></TextBlock>                                
+                            </StackPanel>
+                        </controls:PanoramaItem.Header>
+                        <ListBox Margin="0,0,-12,0" ItemsSource="{Binding ActiveAds}"
+                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                 ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
+                                 ItemTemplate="{StaticResource AdTemplate}"
+                                 SelectionChanged="active_SelectionChanged"
+                                 x:Name="active" />
+                    </controls:PanoramaItem>
+                </Grid>
+            </ScrollViewer>
+            <ScrollViewer x:Name="ClosedScrollViewer" ManipulationCompleted="ClosedScrollViewer_ManipulationCompleted">
+                <Grid>
+                    <controls:PanoramaItem>
+                        <controls:PanoramaItem.Header>
+                            <StackPanel Orientation="Horizontal" Margin="-12,-24,0,0">
+                                <TextBlock Text="zatvoreni"></TextBlock>                                
+                            </StackPanel>
+                        </controls:PanoramaItem.Header>
+                        <ListBox Margin="0,0,-12,0" ItemsSource="{Binding CloseddAds}"
+                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                 ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
+                                 ItemTemplate="{StaticResource AdTemplate}"
+                                 SelectionChanged="closed_SelectionChanged"
+                                 x:Name="closed"/>
+                    </controls:PanoramaItem>
+                </Grid>
+            </ScrollViewer>            
         </controls:Panorama>
     </Grid>
 

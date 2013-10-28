@@ -15,11 +15,27 @@ namespace cipele46.Views
     {        
         public NewAdPage()
         {
-            InitializeComponent();     
+            InitializeComponent();
+            this.DataContext = App.NewAdViewModel;
+            if (((App)Application.Current).User != null)
+            {
+                App.NewAdViewModel.Email = ((App)Application.Current).User.email;
+                App.NewAdViewModel.Phone = ((App)Application.Current).User.phone;
+            }
         }
 
         private void NewAdAppBarButton_Click(object sender, EventArgs e)
         {
+            if (String.IsNullOrWhiteSpace(App.NewAdViewModel.Title))
+            {
+            }
+
+            if (String.IsNullOrWhiteSpace(App.NewAdViewModel.Description))
+            {
+            }
+
+            App.NewAdViewModel.PostAnAd();
+
             NavigationService.Navigate(new Uri("/Views/PostAdSuccessPage.xaml", UriKind.Relative));
         }
 

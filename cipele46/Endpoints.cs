@@ -7,8 +7,14 @@ namespace cipele46
 {
     public static class Endpoints
     {
-        public static readonly string AdsUrl = "http://cipele46.org/ads.json";
-        public static readonly string CategoriesUrl = "http://cipele46.org/categories.json";
-        public static readonly string CountiesUrl = "http://cipele46.org/regions.json";
+        //private static string apiUrl = "http://cipele46.org";
+        private static string apiUrl = "http://staging.cipele46.org/api";
+
+        public static readonly string AdsUrl = apiUrl + "/ads";
+        public static readonly string CategoriesUrl = apiUrl + "/categories.json";
+        public static readonly string CountiesUrl = apiUrl + "/regions.json";
+        public static readonly string RegisterUserUrl = apiUrl + "/users.json";
+        public static readonly string LoginUserUrl = apiUrl + "/users/current.json";
+
     }
 }

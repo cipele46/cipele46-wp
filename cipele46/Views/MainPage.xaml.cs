@@ -116,7 +116,7 @@ namespace cipele46
             {
                 var user = ((App)Application.Current).User;
                 // try logging in immediately
-                var request = HttpWebRequest.CreateHttp("http://cipele46.org/users/show.json");
+                var request = HttpWebRequest.CreateHttp(Endpoints.LoginUserUrl); //"http://cipele46.org/users/show.json");
                 request.Method = "GET";
                 request.Accept = "application/json";
                 request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", user.email, user.password)));

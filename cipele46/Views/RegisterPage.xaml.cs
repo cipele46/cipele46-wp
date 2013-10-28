@@ -108,7 +108,7 @@ namespace cipele46.Views
                 // -d ' {"user":{"first_name":"firstname","last_name":"lastname","email":"emai333331231233l@email.com","password":"app123","password_confirmation":"app123"}}'
                 // http://cipele46.org/users.json
 
-                var request = WebRequest.CreateHttp("http://cipele46.org/users.json");
+                var request = WebRequest.CreateHttp(Endpoints.RegisterUserUrl);
                 request.Method = "POST";
                 request.ContentType = "application/json";
                 request.Accept = "application/json";
@@ -133,7 +133,7 @@ namespace cipele46.Views
                 newStream.Close();
 
                 var response = await request.GetResponseAsync() as HttpWebResponse;
-                if (response.StatusCode == HttpStatusCode.Created)
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
                     var user = new Model.user
                     {
@@ -145,13 +145,16 @@ namespace cipele46.Views
                     ((App)Application.Current).User = user;
 
                     // try logging in immediately
-                    request = HttpWebRequest.CreateHttp("http://cipele46.org/users/show.json");
+                    request = HttpWebRequest.CreateHttp(Endpoints.LoginUserUrl);
                     request.Method = "GET";
                     request.Accept = "application/json";
                     request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", user.email, user.password)));
                     response = await request.GetResponseAsync() as HttpWebResponse;
                     if (response.StatusCode == HttpStatusCode.OK)
+                    {
                         MessageBox.Show("Uspješno ste kreirali korisnički račun");
+                        new Uri("/Views/MyAdsPage.xaml", UriKind.Relative);
+                    }
                 }
 
                 if (RegisterAppBarButton != null)

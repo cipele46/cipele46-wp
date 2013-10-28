@@ -9,6 +9,7 @@ namespace cipele46.Model
     {
         public String email;
         public String name;
-        public string password;
+        public String password;
+        public String phone;
     }
 }

@@ -92,9 +92,9 @@
                     <toolkit:ListPickerItem>Potražnja</toolkit:ListPickerItem>
                 </toolkit:ListPicker>
                 <TextBlock Text="Naslov" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-                <TextBox x:Name="TitleTextBox" Grid.Row="3"></TextBox>
+                <TextBox x:Name="TitleTextBox" Text="{Binding Title}" Grid.Row="3"></TextBox>
                 <TextBlock Text="Opis" Grid.Row="4" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-                <TextBox x:Name="DescriptionTextBox" TextWrapping="Wrap" Grid.Row="5"></TextBox>
+                <TextBox x:Name="DescriptionTextBox" Text="{Binding Description}" TextWrapping="Wrap" Grid.Row="5"></TextBox>
                 <TextBlock Text="Slika" Grid.Row="6" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
                 <Button Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Dodaj sliku" BorderThickness="0" Background="{StaticResource PhoneInactiveBrush}" Foreground="Black" Click="AddImageButton_Click"/>
                 <TextBlock Text="Županija" Grid.Row="8" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
@@ -125,10 +125,10 @@
                 </toolkit:ListPicker>
                 <TextBlock Text="E-mail" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
                 <TextBlock Text="Neće biti direktno vidljiv drugim korisnicima" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-                <TextBox x:Name="EmailTextBox"></TextBox>
+                <TextBox x:Name="EmailTextBox" Text="{Binding Email}"></TextBox>
                 <TextBlock Text="Telefon" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
                 <TextBlock Text="Opcionalno, bit će javno prikazan uz oglas" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-                <TextBox x:Name="PhoneTextBox"></TextBox>
+                <TextBox x:Name="PhoneTextBox" Text="{Binding Phone}"></TextBox>
                 <TextBlock Text="Oglas će biti aktivan 30 dana" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
             </StackPanel>
         </ScrollViewer>

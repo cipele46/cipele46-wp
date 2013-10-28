@@ -172,6 +172,32 @@ namespace cipele46
             }
         }
 
+        private static MyAdsViewModel myAdsViewModel;
+
+        public static MyAdsViewModel MyAdsViewModel
+        {
+            get
+            {
+                if (myAdsViewModel == null)
+                    myAdsViewModel = new MyAdsViewModel();
+
+                return myAdsViewModel;
+            }
+        }
+
+        private static NewAdViewModel newAdViewModel;
+
+        public static NewAdViewModel NewAdViewModel
+        {
+            get
+            {
+                if (newAdViewModel == null)
+                    newAdViewModel = new NewAdViewModel();
+
+                return newAdViewModel;
+            }
+        }
+
         public static AdViewModel SelectedAd { get; set; }
 
         /// <summary>
