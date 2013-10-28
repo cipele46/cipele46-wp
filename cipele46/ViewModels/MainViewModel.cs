@@ -11,7 +11,7 @@ namespace cipele46.ViewModels
 {
     public class MainViewModel : ViewModelBaseEx
     {
-        private const int pageSize = 5;
+        private const int pageSize = 15;
         private int _allAdsPage = 1;
         private int _demandAdsPage = 1;
         private int _supplyAdsPage = 1;

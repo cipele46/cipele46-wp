@@ -149,8 +149,8 @@ namespace cipele46
 
         private void AllScrollViewer_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
-            if (((AllScrollViewer.VerticalOffset - e.TotalManipulation.Translation.Y >= AllScrollViewer.ScrollableHeight)
-                 || (AllScrollViewer.VerticalOffset - e.FinalVelocities.LinearVelocity.Y >= AllScrollViewer.ScrollableHeight)))
+            if (((AllScrollViewer.VerticalOffset - e.TotalManipulation.Translation.Y >= AllScrollViewer.ScrollableHeight - AllScrollViewer.ScrollableHeight / 5)
+                 || (AllScrollViewer.VerticalOffset - e.FinalVelocities.LinearVelocity.Y >= AllScrollViewer.ScrollableHeight - AllScrollViewer.ScrollableHeight / 5)))
             {
                 App.ViewModel.LoadAllAdsAsync();
             }
@@ -158,8 +158,8 @@ namespace cipele46
 
         private void SupplyScrollViewer_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
-            if (((SupplyScrollViewer.VerticalOffset - e.TotalManipulation.Translation.Y >= SupplyScrollViewer.ScrollableHeight)
-                 || (SupplyScrollViewer.VerticalOffset - e.FinalVelocities.LinearVelocity.Y >= SupplyScrollViewer.ScrollableHeight)))
+            if (((SupplyScrollViewer.VerticalOffset - e.TotalManipulation.Translation.Y >= SupplyScrollViewer.ScrollableHeight - SupplyScrollViewer.ScrollableHeight / 5)
+                 || (SupplyScrollViewer.VerticalOffset - e.FinalVelocities.LinearVelocity.Y >= SupplyScrollViewer.ScrollableHeight - SupplyScrollViewer.ScrollableHeight / 5)))
             {
                 App.ViewModel.LoadSupplyAdsAsync();
             }
@@ -167,8 +167,8 @@ namespace cipele46
 
         private void DemandScrollViewer_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
         {
-            if (((DemandScrollViewer.VerticalOffset - e.TotalManipulation.Translation.Y >= DemandScrollViewer.ScrollableHeight)
-                 || (DemandScrollViewer.VerticalOffset - e.FinalVelocities.LinearVelocity.Y >= DemandScrollViewer.ScrollableHeight)))
+            if (((DemandScrollViewer.VerticalOffset - e.TotalManipulation.Translation.Y >= DemandScrollViewer.ScrollableHeight - DemandScrollViewer.ScrollableHeight / 5)
+                 || (DemandScrollViewer.VerticalOffset - e.FinalVelocities.LinearVelocity.Y >= DemandScrollViewer.ScrollableHeight - DemandScrollViewer.ScrollableHeight / 5)))
             {
                 App.ViewModel.LoadDemandAdsAsync();
             }
