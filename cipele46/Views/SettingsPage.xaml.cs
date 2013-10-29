@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using cipele46.ViewModels;
 using System.Windows.Input;
+using cipele46.Model;
 
 namespace cipele46.Views
 {

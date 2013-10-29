@@ -62,11 +62,18 @@ namespace cipele46.ViewModels
 
         void wc_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
-            ((App)Application.Current).User = newUser;
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            if (e.Error == null)
             {
-                (App.Current.RootVisual as PhoneApplicationFrame).GoBack();
-            });
+                ((App)Application.Current).User = newUser;
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    (App.Current.RootVisual as PhoneApplicationFrame).GoBack();
+                });
+            }
+            else
+            {
+                MessageBox.Show(ErrorStrings.LoginFail);
+            }
         }
 
         public String FirstName
