@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using cipele46.Model;
 
 namespace cipele46.Views
 {
@@ -42,7 +43,7 @@ namespace cipele46.Views
             NavigationService.Navigate(new Uri("/Views/FacebookLoginPage.xaml", UriKind.Relative));
         }
 
-        private void SignInButton_Click(object sender, RoutedEventArgs e)
+        private async void SignInButton_Click(object sender, RoutedEventArgs e)
         {
             String email = EmailTextBox.Text;
             String password = PasswordTextBox.Password;
@@ -59,19 +60,32 @@ namespace cipele46.Views
             }
             else
             {
-                //TODO login
-                if (!String.IsNullOrWhiteSpace(successUri))
+                user user = new user();
+                user.email = email;
+                user.password = password;
+
+                HttpStatusCode loginStatusCode = await Tools.LoginUser(user);
+
+                if (loginStatusCode == HttpStatusCode.OK)
                 {
-                    NavigationService.Navigate(new Uri(successUri, UriKind.Relative));
-                    Dispatcher.BeginInvoke(() =>
+                    if (!String.IsNullOrWhiteSpace(successUri))
                     {
-                        NavigationService.RemoveBackEntry();
-                    });
+                        NavigationService.Navigate(new Uri(successUri, UriKind.Relative));
+                        Dispatcher.BeginInvoke(() =>
+                        {
+                            NavigationService.RemoveBackEntry();
+                        });
+                    }
+                    else
+                    {
+                        NavigationService.GoBack();
+                    }
                 }
                 else
                 {
-                    NavigationService.GoBack();
+                    MessageBox.Show(ErrorStrings.LoginFail);
                 }
+                
             }
         }
 

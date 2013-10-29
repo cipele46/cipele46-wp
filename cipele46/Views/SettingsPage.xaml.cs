@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using cipele46.ViewModels;
 
 namespace cipele46.Views
 {
@@ -15,6 +16,7 @@ namespace cipele46.Views
         public SettingsPage()
         {
             InitializeComponent();
+            this.DataContext = new SettingsViewModel();
         }
 
         private void SettingsAppBarButton_Click(object sender, EventArgs e)

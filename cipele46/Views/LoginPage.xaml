@@ -68,7 +68,7 @@
             <!--<Button x:Name="fbSigninButton" Grid.Row="0" Content="prijava putem facebooka" Click="fbSigninButton_Click" Background="#3B5999" Foreground="White"></Button>-->
             
             <TextBlock Text="E-mail" Grid.Row="1" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-            <TextBox x:Name="EmailTextBox" Grid.Row="2"></TextBox>
+            <TextBox x:Name="EmailTextBox" InputScope="EmailNameOrAddress" Grid.Row="2"></TextBox>
             <TextBlock Text="Lozinka" Grid.Row="3" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
             <PasswordBox x:Name="PasswordTextBox" Grid.Row="4"></PasswordBox>
             <Button x:Name="SignInButton" Content="Prijavi se" Grid.Row="5" Click="SignInButton_Click"></Button>

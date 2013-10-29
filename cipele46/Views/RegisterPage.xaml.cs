@@ -1,4 +1,5 @@
-﻿using Microsoft.Phone.Controls;
+﻿using cipele46.Model;
+using Microsoft.Phone.Controls;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
@@ -137,23 +138,18 @@ namespace cipele46.Views
                 {
                     var user = new Model.user
                     {
-                        name = NameTextBox.Text,
+                        first_name = NameTextBox.Text,
                         password = PasswordTextBox.Password,
                         email = EmailTextBox.Text
-                    };
+                    };                                      
 
-                    ((App)Application.Current).User = user;
+                    // try logging in immediately                   
+                    HttpStatusCode loginStatusCode = await Tools.LoginUser(user);
 
-                    // try logging in immediately
-                    request = HttpWebRequest.CreateHttp(Endpoints.LoginUserUrl);
-                    request.Method = "GET";
-                    request.Accept = "application/json";
-                    request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", user.email, user.password)));
-                    response = await request.GetResponseAsync() as HttpWebResponse;
-                    if (response.StatusCode == HttpStatusCode.OK)
+                    if (loginStatusCode == HttpStatusCode.OK)
                     {
                         MessageBox.Show("Uspješno ste kreirali korisnički račun");
-                        new Uri("/Views/MyAdsPage.xaml", UriKind.Relative);
+                        NavigationService.Navigate(new Uri("/Views/MyAdsPage.xaml", UriKind.Relative));
                     }
                 }
 
@@ -161,15 +157,6 @@ namespace cipele46.Views
                     RegisterAppBarButton.IsEnabled = true;
                 IsBusy = false;
             }
-        }
-
-        public class user
-        {
-            public string first_name { get; set; }
-            public string last_name { get; set; }
-            public string email { get; set; }
-            public string password { get; set; }
-            public string password_confirmation { get; set; }
         }
 
         public class registration_info
