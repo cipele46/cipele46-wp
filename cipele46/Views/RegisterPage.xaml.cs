@@ -114,7 +114,7 @@ namespace cipele46.Views
                 request.ContentType = "application/json";
                 request.Accept = "application/json";
 
-                var data = JsonConvert.SerializeObject(new registration_info
+                var data = JsonConvert.SerializeObject(new Tools.registration_info
                 {
                     user = new user
                     {
@@ -157,11 +157,6 @@ namespace cipele46.Views
                     RegisterAppBarButton.IsEnabled = true;
                 IsBusy = false;
             }
-        }
-
-        public class registration_info
-        {
-            public user user { get; set; }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

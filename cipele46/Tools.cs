@@ -28,8 +28,9 @@ namespace cipele46
 
                 using (var reader = new StreamReader(response.GetResponseStream())) {                   
                     var userJson = await reader.ReadToEndAsync();
-                    user = JsonConvert.DeserializeObject<user>(userJson);
-                    ((App)Application.Current).User = user;
+                    user returnedUser = JsonConvert.DeserializeObject<user>(userJson);
+                    returnedUser.password = user.password;
+                    ((App)Application.Current).User = returnedUser;
                 }
 
                 return response.StatusCode;
@@ -38,6 +39,11 @@ namespace cipele46
             {
                 return HttpStatusCode.Forbidden;
             }
+        }
+
+        public class registration_info
+        {
+            public user user { get; set; }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using cipele46.ViewModels;
+using System.Windows.Input;
 
 namespace cipele46.Views
 {
@@ -21,7 +22,14 @@ namespace cipele46.Views
 
         private void SettingsAppBarButton_Click(object sender, EventArgs e)
         {
-
+            //used to update update the binding source for textboxes
+            object focusObj = FocusManager.GetFocusedElement();
+            if (focusObj != null && focusObj is TextBox)
+            {
+                var binding = (focusObj as TextBox).GetBindingExpression(TextBox.TextProperty);
+                binding.UpdateSource();
+            }
+            (this.DataContext as SettingsViewModel).ChangeUserData();
         }
 
         private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
