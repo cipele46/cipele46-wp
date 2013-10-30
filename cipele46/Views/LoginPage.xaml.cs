@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using cipele46.Model;
+using cipele46.ViewModels;
 
 namespace cipele46.Views
 {
@@ -19,6 +20,7 @@ namespace cipele46.Views
         {
             InitializeComponent();
             this.Loaded += LoginPage_Loaded;
+            this.DataContext = new SettingsViewModel();
         }
 
         private void LoginPage_Loaded(object sender, RoutedEventArgs e)
@@ -60,11 +62,17 @@ namespace cipele46.Views
             }
             else
             {
+                (this.DataContext as SettingsViewModel).IsDataLoaded = false;
+                (this.DataContext as SettingsViewModel).IsDataLoading = true;
+
                 user user = new user();
                 user.email = email;
                 user.password = password;
 
                 HttpStatusCode loginStatusCode = await Tools.LoginUser(user);
+
+                (this.DataContext as SettingsViewModel).IsDataLoaded = true;
+                (this.DataContext as SettingsViewModel).IsDataLoading = false;
 
                 if (loginStatusCode == HttpStatusCode.OK)
                 {
@@ -85,7 +93,6 @@ namespace cipele46.Views
                 {
                     MessageBox.Show(ErrorStrings.LoginFail);
                 }
-                
             }
         }
 

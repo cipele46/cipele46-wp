@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using cipele46.Model;
 using System.Text;
 using Newtonsoft.Json;
+using cipele46.ViewModels;
 
 namespace cipele46.Views
 {
@@ -20,6 +21,7 @@ namespace cipele46.Views
         public ChangePasswordPage()
         {
             InitializeComponent();
+            this.DataContext = new SettingsViewModel();
         }
 
         private void ChangePasswordAppBarButton_Click(object sender, EventArgs e)
@@ -38,6 +40,8 @@ namespace cipele46.Views
                 return;
             }
 
+            (this.DataContext as SettingsViewModel).IsDataLoading = true;
+            (this.DataContext as SettingsViewModel).IsDataLoaded = false;
             user user = ((App)Application.Current).User;
             WebClient wc = new WebClient();
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
@@ -77,6 +81,8 @@ namespace cipele46.Views
             {
                 MessageBox.Show(ErrorStrings.LoginFail);
             }
+            (this.DataContext as SettingsViewModel).IsDataLoading = false;
+            (this.DataContext as SettingsViewModel).IsDataLoaded = true;
         }
     }
 }

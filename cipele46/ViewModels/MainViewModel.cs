@@ -28,23 +28,10 @@ namespace cipele46.ViewModels
         private bool _isDemandAdsLoaded;
         private bool _isSupplyAdsLoaded;
 
-        private bool _isDataLoading;
-        private bool _isDataLoaded;
-
         private ObservableCollection<AdViewModel> _ads;
         private ObservableCollection<AdViewModel> _supplyAds;
         private ObservableCollection<AdViewModel> _demandAds;
 
-        public bool IsDataLoading
-        {
-            get { return _isDataLoading; }
-            set { Set(ref _isDataLoading, value); }
-        }
-        public bool IsDataLoaded
-        {
-            get { return _isDataLoaded; }
-            set { Set(ref _isDataLoaded, value); }
-        }
         public bool IsAllAdsLoaded
         {
             get { return _isAllAdsLoaded; }

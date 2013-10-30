@@ -3,6 +3,9 @@ using Microsoft.Phone.Tasks;
 using System;
 using cipele46.Model;
 using System.Windows;
+using System.Net;
+using System.Text;
+using Microsoft.Phone.Shell;
 
 namespace cipele46.Views
 {
@@ -53,8 +56,39 @@ namespace cipele46.Views
             }
             else
             {
-                
+                _viewModel.IsDataLoading = true;
+                _viewModel.IsDataLoaded = false;
+                user = ((App)Application.Current).User;
+                WebClient wc = new WebClient();
+                wc.Headers[HttpRequestHeader.ContentType] = "application/json";
+                wc.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", user.email, user.password)));
+                wc.UploadStringCompleted += wc_UploadStringCompleted;
+                wc.Headers[HttpRequestHeader.ContentLength] = "0";
+                wc.UploadStringAsync(new Uri(String.Format(Endpoints.ToggleFavoriteUrl, _viewModel.Id)), "PUT", "");
             }
+        }
+
+        void wc_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
+        {
+            if (e.Error == null)
+            {
+                ApplicationBarIconButton btn = (ApplicationBarIconButton)ApplicationBar.Buttons[2];
+
+                if (btn.IconUri.ToString().Contains("appbar.favs.addto.rest.png"))
+                {
+                    btn.IconUri = new Uri("Icons/appbar.favs.rest.png", UriKind.Relative);
+                }
+                else
+                {
+                    btn.IconUri = new Uri("Icons/appbar.favs.addto.rest.png", UriKind.Relative);
+                }
+            }
+            else
+            {
+
+            }
+            _viewModel.IsDataLoading = false;
+            _viewModel.IsDataLoaded = true;
         }
     }
 }

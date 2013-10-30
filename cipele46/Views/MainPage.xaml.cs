@@ -115,7 +115,9 @@ namespace cipele46
             else
             {
                 var user = ((App)Application.Current).User;
+                App.ViewModel.IsDataLoading = true;
                 HttpStatusCode loginStatusCode = await Tools.LoginUser(user);
+                App.ViewModel.IsDataLoading = false;
                 if (loginStatusCode == HttpStatusCode.OK)
                     NavigationService.Navigate(myAdsPageUri);
                 else

@@ -5,6 +5,20 @@ namespace cipele46.ViewModels
 {
     public class ViewModelBaseEx : ViewModelBase
     {
+        private bool _isDataLoading;
+        private bool _isDataLoaded;
+
+        public bool IsDataLoading
+        {
+            get { return _isDataLoading; }
+            set { Set(ref _isDataLoading, value); }
+        }
+        public bool IsDataLoaded
+        {
+            get { return _isDataLoaded; }
+            set { Set(ref _isDataLoaded, value); }
+        }
+
         /// <summary>
         /// Force using new C# 5.0 feature.
         /// </summary>

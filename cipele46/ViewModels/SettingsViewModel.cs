@@ -36,6 +36,8 @@ namespace cipele46.ViewModels
 
         public void ChangeUserData()
         {
+            IsDataLoading = true;
+            IsDataLoaded = false;
             user user = ((App)Application.Current).User;
             WebClient wc = new WebClient();            
             wc.Headers[HttpRequestHeader.ContentType] = "application/json";
@@ -62,6 +64,8 @@ namespace cipele46.ViewModels
 
         void wc_UploadStringCompleted(object sender, UploadStringCompletedEventArgs e)
         {
+            IsDataLoading = false;
+            IsDataLoaded = true;
             if (e.Error == null)
             {
                 ((App)Application.Current).User = newUser;

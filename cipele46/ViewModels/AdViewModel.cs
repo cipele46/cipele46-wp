@@ -1,7 +1,11 @@
 ﻿using cipele46.Model;
 using Microsoft.Phone.Tasks;
+using System;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -150,6 +154,7 @@ namespace cipele46.ViewModels
 
         public string Phone { get { return _model.phone; } }
         public string Mail { get { return _model.email; } }
+        public string Id { get { return _model.id.ToString(); } }
 
         public bool HasPhone { get { return !string.IsNullOrWhiteSpace(_model.phone); } }
         public bool HasMail { get { return !string.IsNullOrWhiteSpace(_model.email); } }
@@ -177,5 +182,7 @@ namespace cipele46.ViewModels
         void SendMessage()
         {
         }
+
+        
     }
 }
