@@ -16,6 +16,7 @@ namespace cipele46
         public static readonly string RegisterUserUrl = apiUrl + "/users.json";
         public static readonly string LoginUserUrl = apiUrl + "/users/current.json";
         public static readonly string ToggleFavoriteUrl = apiUrl + "/ads/{0}/toggle_favorite";
+        public static readonly string ReplyToAddUrl = apiUrl + "/ads/{0}/reply";
 
     }
 }

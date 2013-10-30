@@ -26,21 +26,20 @@ namespace cipele46.Views
 
         private void MessageAppBarButton_Click(object sender, System.EventArgs e)
         {
-            user user = ((App)Application.Current).User;
+            //user user = ((App)Application.Current).User;
             Uri sendMessageUri = new Uri("/Views/SendMessagePage.xaml", UriKind.Relative);
-            if (user == null)
-            {
-                MessageBoxResult result = MessageBox.Show("Za slanje poruke potrebna je prijava", "Prijavite se", MessageBoxButton.OKCancel);
-                if (result.Equals(MessageBoxResult.OK))
-                {
-                    
-                    NavigationService.Navigate(new Uri(String.Format("/Views/LoginPage.xaml?successUri={0}", sendMessageUri.OriginalString), UriKind.Relative));
-                }               
-            }
-            else
-            {
+            //if (user == null)
+            //{
+            //    MessageBoxResult result = MessageBox.Show("Za slanje poruke potrebna je prijava", "Prijavite se", MessageBoxButton.OKCancel);
+            //    if (result.Equals(MessageBoxResult.OK))
+            //    {
+            //        NavigationService.Navigate(new Uri(String.Format("/Views/LoginPage.xaml?successUri={0}", sendMessageUri.OriginalString), UriKind.Relative));
+            //    }               
+            //}
+            //else
+            //{
                 NavigationService.Navigate(sendMessageUri);
-            }
+            //}
         }
 
         private void FavoriteAppBarButton_Click(object sender, System.EventArgs e)
