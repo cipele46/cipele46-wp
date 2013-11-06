@@ -77,7 +77,7 @@
                     <controls:PanoramaItem>
                         <controls:PanoramaItem.Header>
                             <StackPanel Orientation="Horizontal" Margin="-12,-24,0,0">
-                                <TextBlock Text="ponuda"></TextBlock>
+                                <TextBlock Text="poklanjamo"></TextBlock>
                                 <TextBlock x:Name="FilterTextBlockPonuda" Margin="12,30,0,0" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" MouseLeftButtonUp="FilterTextBlock_MouseLeftButtonUp"></TextBlock>
                             </StackPanel>
                         </controls:PanoramaItem.Header>
@@ -95,7 +95,7 @@
                     <controls:PanoramaItem>
                         <controls:PanoramaItem.Header>
                             <StackPanel Orientation="Horizontal" Margin="-12,-24,0,0">
-                                <TextBlock Text="potražnja"></TextBlock>
+                                <TextBlock Text="trebamo"></TextBlock>
                                 <TextBlock x:Name="FilterTextBlockPotraznja" Margin="12,30,0,0" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" MouseLeftButtonUp="FilterTextBlock_MouseLeftButtonUp"></TextBlock>
                             </StackPanel>
                         </controls:PanoramaItem.Header>

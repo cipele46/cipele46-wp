@@ -37,7 +37,7 @@ namespace cipele46.Views
         {
             InputPrompt inputPrompt = new InputPrompt
             {
-                Title = "traži",
+                Title = "traži oglase",
                 Message = ""
             };
 

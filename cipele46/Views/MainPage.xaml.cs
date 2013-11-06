@@ -86,7 +86,7 @@ namespace cipele46
         {
             InputPrompt inputPrompt = new InputPrompt
             {
-                Title = "traži",
+                Title = "traži oglase",
                 Message = ""
             };
 
