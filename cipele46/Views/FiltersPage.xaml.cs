@@ -27,17 +27,20 @@ namespace cipele46.Views
         private void FiltersAppBarButton_Click(object sender, EventArgs e)
         {
             category categoryFilter = (category)CategoriesPicker.SelectedItem;
-            if (categoryFilter.id != ((App)Application.Current).CategoryFilter.id)
+            if (categoryFilter != null)
             {
-                ((App)Application.Current).CategoryFilter = categoryFilter;                
-                App.ViewModel.ClearData();
-            }
+                if (categoryFilter.id != ((App)Application.Current).CategoryFilter.id)
+                {
+                    ((App)Application.Current).CategoryFilter = categoryFilter;
+                    App.ViewModel.ClearData();
+                }
 
-            county countyFilter = (county)CountyPicker.SelectedItem;
-            if (countyFilter.id != ((App)Application.Current).CountyFilter.id)
-            {
-                ((App)Application.Current).CountyFilter = countyFilter;
-                App.ViewModel.ClearData();
+                county countyFilter = (county)CountyPicker.SelectedItem;
+                if (countyFilter.id != ((App)Application.Current).CountyFilter.id)
+                {
+                    ((App)Application.Current).CountyFilter = countyFilter;
+                    App.ViewModel.ClearData();
+                }
             }
 
             NavigationService.GoBack();

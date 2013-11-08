@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System;
+using System.Text;
 
 namespace cipele46.ViewModels
 {
@@ -28,6 +29,10 @@ namespace cipele46.ViewModels
         private bool _isDemandAdsLoaded;
         private bool _isSupplyAdsLoaded;
 
+        private bool _allAdsEmpty = false;
+        private bool _supplyAdsEmpty = false;
+        private bool _demandAdsEmpty = false;
+
         private ObservableCollection<AdViewModel> _ads;
         private ObservableCollection<AdViewModel> _supplyAds;
         private ObservableCollection<AdViewModel> _demandAds;
@@ -46,7 +51,22 @@ namespace cipele46.ViewModels
         {
             get { return _isSupplyAdsLoaded; }
             set { Set(ref _isSupplyAdsLoaded, value); }
-        } 
+        }
+        public bool AllAdsEmpty
+        {
+            get {return _allAdsEmpty;}
+            set { Set(ref _allAdsEmpty, value); }
+        }
+        public bool SupplyAdsEmpty
+        {
+            get { return _supplyAdsEmpty; }
+            set { Set(ref _supplyAdsEmpty, value); }
+        }
+        public bool DemandAdsEmpty
+        {
+            get { return _demandAdsEmpty; }
+            set { Set(ref _demandAdsEmpty, value); }
+        }
 
         public ObservableCollection<AdViewModel> Ads
         {
@@ -96,8 +116,15 @@ namespace cipele46.ViewModels
                 return;
             _isAllAdsLoading = true;            
             IsDataLoading = true;
-            
-            var taskAds = new WebClient().DownloadStringTaskAsync(getAdsUrl(_allAdsPage));
+
+            WebClient wc = new WebClient();
+            user user = ((App)Application.Current).User;
+            if (user != null)
+            {
+                wc.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", user.email, user.password)));
+            }
+            var taskAds = wc.DownloadStringTaskAsync(getAdsUrl(_allAdsPage));                        
+
             await TaskEx.WhenAll(App.GetCategoriesAsync(),
                                  App.GetCountiesAsync(), 
                                  taskAds);
@@ -109,6 +136,16 @@ namespace cipele46.ViewModels
                 ++resultsNumber;
                 Ads.Add(new AdViewModel(ad));
             }
+
+            if (resultsNumber == 0)
+            {
+                AllAdsEmpty = true;
+            }
+            else
+            {
+                AllAdsEmpty = false;
+            }
+            
 
             if (resultsNumber < pageSize)
             {
@@ -142,6 +179,15 @@ namespace cipele46.ViewModels
                 DemandAds.Add(new AdViewModel(ad));
             }
 
+            if (resultsNumber == 0)
+            {
+                DemandAdsEmpty = true;
+            }
+            else
+            {
+                DemandAdsEmpty = false;
+            }
+
             if (resultsNumber < pageSize)
             {
                 _hasMoreDemandAds = false;
@@ -172,6 +218,15 @@ namespace cipele46.ViewModels
             {
                 ++resultsNumber;
                 SupplyAds.Add(new AdViewModel(ad));
+            }
+
+            if (resultsNumber == 0)
+            {
+                SupplyAdsEmpty = true;
+            }
+            else
+            {
+                SupplyAdsEmpty = false;
             }
 
             if (resultsNumber < pageSize)

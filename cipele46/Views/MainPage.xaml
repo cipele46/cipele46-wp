@@ -62,6 +62,7 @@
                             </StackPanel>
                         </controls:PanoramaItem.Header>
                         <StackPanel>
+                            <TextBlock x:Name="NoAllAdsMessage" Visibility="{Binding AllAdsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
                             <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Ads}"
                                      ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                      ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
@@ -81,12 +82,15 @@
                                 <TextBlock x:Name="FilterTextBlockPonuda" Margin="12,30,0,0" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" MouseLeftButtonUp="FilterTextBlock_MouseLeftButtonUp"></TextBlock>
                             </StackPanel>
                         </controls:PanoramaItem.Header>
-                        <ListBox Margin="0,0,-12,0" ItemsSource="{Binding SupplyAds}"
+                        <StackPanel>
+                            <TextBlock x:Name="NoSupplyAdsMessage" Visibility="{Binding SupplyAdsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                            <ListBox Margin="0,0,-12,0" ItemsSource="{Binding SupplyAds}"
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                  ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
                                  ItemTemplate="{StaticResource AdTemplate}"
                                  SelectionChanged="ListBox_SelectionChanged"
                                  x:Name="lbSupply" />
+                        </StackPanel>
                     </controls:PanoramaItem>
                 </Grid>
             </ScrollViewer>
@@ -99,12 +103,15 @@
                                 <TextBlock x:Name="FilterTextBlockPotraznja" Margin="12,30,0,0" Text="{Binding FilterText}" Style="{StaticResource PhoneTextSubtleStyle}" MouseLeftButtonUp="FilterTextBlock_MouseLeftButtonUp"></TextBlock>
                             </StackPanel>
                         </controls:PanoramaItem.Header>
-                        <ListBox Margin="0,0,-12,0" ItemsSource="{Binding DemandAds}"
+                        <StackPanel>
+                            <TextBlock x:Name="NoDemandAdsMessage" Visibility="{Binding DemandAdsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
+                            <ListBox Margin="0,0,-12,0" ItemsSource="{Binding DemandAds}"
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                  ItemContainerStyle="{StaticResource StretchListBoxItemStyle}"
                                  ItemTemplate="{StaticResource AdTemplate}"
                                  SelectionChanged="ListBox_SelectionChanged"
                                  x:Name="lbDemand"/>
+                        </StackPanel>
                     </controls:PanoramaItem>
                 </Grid>
             </ScrollViewer>

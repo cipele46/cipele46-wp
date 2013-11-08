@@ -14,6 +14,7 @@ using Coding4Fun.Toolkit.Controls;
 using cipele46.ViewModels;
 using System.Text;
 using System.Windows.Navigation;
+using Microsoft.Phone.Net.NetworkInformation;
 
 namespace cipele46
 {
@@ -34,7 +35,7 @@ namespace cipele46
         // Load data for the ViewModel Items
         private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            
+            NoAllAdsMessage.Text = NoSupplyAdsMessage.Text = NoDemandAdsMessage.Text = ErrorStrings.NoAdsForFilters;
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
@@ -50,22 +51,32 @@ namespace cipele46
             {
                 if (e.NavigationMode == NavigationMode.New)
                 {
-                    App.ViewModel.LoadAllAdsAsync();
-                }
-                else
-                {
-                    if (Panorama.SelectedIndex == 0)
+                    if (!NetworkInterface.GetIsNetworkAvailable())
+                    {
+                        MessageBox.Show(ErrorStrings.NoNetworkConnection);                        
+                    }
+                    else
                     {
                         App.ViewModel.LoadAllAdsAsync();
                     }
-                    else if (Panorama.SelectedIndex == 1)
+                }
+                else
+                {
+                    if (NetworkInterface.GetIsNetworkAvailable())
                     {
-                        App.ViewModel.LoadSupplyAdsAsync();
-                    }
-                    else if (Panorama.SelectedIndex == 2)
-                    {
-                        App.ViewModel.LoadDemandAdsAsync();
-                    }
+                        if (Panorama.SelectedIndex == 0)
+                        {
+                            App.ViewModel.LoadAllAdsAsync();
+                        }
+                        else if (Panorama.SelectedIndex == 1)
+                        {
+                            App.ViewModel.LoadSupplyAdsAsync();
+                        }
+                        else if (Panorama.SelectedIndex == 2)
+                        {
+                            App.ViewModel.LoadDemandAdsAsync();
+                        }
+                    }                
                 }
             }
 
