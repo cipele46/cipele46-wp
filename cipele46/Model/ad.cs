@@ -27,7 +27,7 @@ namespace cipele46.Model
     {
         public int ad_type { get; set; }
         public int category_id { get; set; }
-        public int city_id { get; set; }
+        public int city_id { get; set; }        
         public string created_at { get; set; }
         public string description { get; set; }
         public string email { get; set; }
@@ -38,5 +38,6 @@ namespace cipele46.Model
         public string title { get; set; }
         public string updated_at { get; set; }
         public int? user_id { get; set; }
+        public int region_id { get; set; }
     }
 }

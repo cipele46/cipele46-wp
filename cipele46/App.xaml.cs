@@ -16,6 +16,14 @@ namespace cipele46
     {
         #region Shared stuff
 
+        private static List<category> _categories;
+
+        public static List<category> Categories
+        {
+            get { return _categories; }
+            set { _categories = value; }
+        }
+
         static Task<List<category>> _taskCategories = null;
 
         public static Task<List<category>> GetCategoriesAsync()
@@ -27,13 +35,17 @@ namespace cipele46
                 {
                     var client = new WebClient();
                     var data = await client.DownloadStringTaskAsync(Endpoints.CategoriesUrl);
-                    List<category> categories = (await JsonConvertEx.DeserializeObjectAsync<Model.category[]>(data)).ToList();
-                    category categoryAll = new category();
-                    categoryAll.name = "Sve kategorije";
-                    categoryAll.id = 0;
-                    categories.Insert(0, categoryAll);
-                    return categories;
+                    Categories = (await JsonConvertEx.DeserializeObjectAsync<Model.category[]>(data)).ToList();                    
+                    return Categories;
                 });
+        }
+
+        private static List<county> _counties;
+
+        public static List<county> Counties
+        {
+            get { return _counties; }
+            set { _counties = value; }
         }
 
         static Task<List<county>> _taskCounties = null;
@@ -47,12 +59,8 @@ namespace cipele46
             {
                 var client = new WebClient();
                 var data = await client.DownloadStringTaskAsync(Endpoints.CountiesUrl);                
-                List<county> counties = (await JsonConvertEx.DeserializeObjectAsync<Model.county[]>(data)).ToList();
-                county countyAll = new county();
-                countyAll.name = "Sve županije";
-                countyAll.id = 0;
-                counties.Insert(0, countyAll);
-                return counties;
+                Counties = (await JsonConvertEx.DeserializeObjectAsync<Model.county[]>(data)).ToList();                
+                return Counties;
             });
         }
 

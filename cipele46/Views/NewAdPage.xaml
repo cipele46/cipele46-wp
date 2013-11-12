@@ -12,7 +12,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="{Binding IsDataLoading}"
+    shell:SystemTray.Opacity=".9">
 
     <toolkit:TransitionService.NavigationInTransition>
         <toolkit:NavigationInTransition>
@@ -92,32 +93,40 @@
                     <toolkit:ListPickerItem>Potražnja</toolkit:ListPickerItem>
                 </toolkit:ListPicker>
                 <TextBlock Text="Naslov" Grid.Row="2" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-                <TextBox x:Name="TitleTextBox" Text="{Binding Title}" Grid.Row="3"></TextBox>
+                <TextBox x:Name="TitleTextBox" Text="{Binding Title, Mode=TwoWay}" Grid.Row="3"></TextBox>
                 <TextBlock Text="Opis" Grid.Row="4" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-                <TextBox x:Name="DescriptionTextBox" Text="{Binding Description}" TextWrapping="Wrap" Grid.Row="5"></TextBox>
+                <TextBox x:Name="DescriptionTextBox" Text="{Binding Description, Mode=TwoWay}" TextWrapping="Wrap" Grid.Row="5" Height="140"></TextBox>
                 <TextBlock Text="Slika" Grid.Row="6" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-                <Button Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" Content="Dodaj sliku" BorderThickness="0" Background="{StaticResource PhoneInactiveBrush}" Foreground="Black" Click="AddImageButton_Click"/>
+                <Button x:Name="AddImageButton" Width="200" Height="200" HorizontalAlignment="Left" VerticalAlignment="Center" BorderThickness="0" Background="{StaticResource PhoneInactiveBrush}" Foreground="Black" Click="AddImageButton_Click">
+                    <Grid>
+                        <TextBlock Text="Dodaj sliku" VerticalAlignment="Center"></TextBlock>
+                        <Image x:Name="AddImage" Stretch="UniformToFill" Height="200" Width="200" />
+                    </Grid>
+                </Button>
                 <TextBlock Text="Županija" Grid.Row="8" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
                 <toolkit:ListPicker 
                             Grid.Row="9"
                             x:Name="CountyPicker"
-                            ItemsSource="{Binding Counties}"
+                            ItemsSource="{Binding Counties, Mode=TwoWay}"
                             SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"
                             ItemTemplate="{StaticResource CountyPickerItemTemplate}"    
                             FullModeItemTemplate="{StaticResource CountyPickerFullModeItemTemplate}" 
-                            FullModeHeader="Županija" CacheMode="BitmapCache" />
+                            FullModeHeader="Županija" CacheMode="BitmapCache" 
+                            SelectionChanged="CountyPicker_SelectionChanged"/>
                 <TextBlock Text="Grad" Grid.Row="10" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>                
                 <toolkit:ListPicker 
                             Grid.Row="11"
                             x:Name="CityPicker"
-                            ItemsSource="{Binding Cities}"                            
+                            ItemsSource="{Binding Cities, Mode=TwoWay}"                            
+                            ItemTemplate="{StaticResource CityPickerItemTemplate}"
+                            FullModeItemTemplate="{StaticResource CityPickerFullModeItemTemplate}"
                             SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"
-                            FullModeHeader="Županija" CacheMode="BitmapCache">                    
+                            FullModeHeader="Grad" CacheMode="BitmapCache">                    
                 </toolkit:ListPicker>
                 <TextBlock Text="Kategorija" Style="{StaticResource PhoneTextSubtleStyle}"/>
                 <toolkit:ListPicker
                         x:Name="CategoriesPicker"
-                        ItemsSource="{Binding Categories}"
+                        ItemsSource="{Binding Categories, Mode=TwoWay}"
                         ItemTemplate="{StaticResource CategoryPickerItemTemplate}"    
                         FullModeItemTemplate="{StaticResource CategoryPickerFullModeItemTemplate}"  
                         SelectedItem="{Binding Path=PickerSelected, Mode=TwoWay}"                        
@@ -125,10 +134,10 @@
                 </toolkit:ListPicker>
                 <TextBlock Text="E-mail" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
                 <TextBlock Text="Neće biti direktno vidljiv drugim korisnicima" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-                <TextBox x:Name="EmailTextBox" Text="{Binding Email}"></TextBox>
+                <TextBox x:Name="EmailTextBox" Text="{Binding Email, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Telefon" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
                 <TextBlock Text="Opcionalno, bit će javno prikazan uz oglas" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
-                <TextBox x:Name="PhoneTextBox" Text="{Binding Phone}"></TextBox>
+                <TextBox x:Name="PhoneTextBox" Text="{Binding Phone, Mode=TwoWay}"></TextBox>
                 <TextBlock Text="Oglas će biti aktivan 30 dana" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
             </StackPanel>
         </ScrollViewer>

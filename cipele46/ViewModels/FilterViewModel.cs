@@ -54,10 +54,33 @@ namespace cipele46.ViewModels
                 return;
             IsDataLoading = true;
 
-            foreach (var category in await App.GetCategoriesAsync())
+            List<category> categories = new List<category>(App.Categories);
+            if (categories == null)
+            {
+                categories = await App.GetCategoriesAsync();
+                
+            }
+            category categoryAll = new category();
+            categoryAll.name = "Sve kategorije";
+            categoryAll.id = 0;
+            categories.Insert(0, categoryAll);
+
+            foreach (var category in categories)
                 Categories.Add(category);
 
-            foreach (var county in await App.GetCountiesAsync())
+            List<county> counties = new List<county>(App.Counties);
+            if (counties == null)
+            {
+                counties = await App.GetCountiesAsync();
+                
+            }
+
+            county countyAll = new county();
+            countyAll.name = "Sve županije";
+            countyAll.id = 0;
+            counties.Insert(0, countyAll);
+
+            foreach (var county in counties)
                 Counties.Add(county);
 
             CategoryFilter = Categories.FirstOrDefault(i => i != null && i.id == ((App)Application.Current).CategoryFilter.id);

@@ -118,11 +118,11 @@ namespace cipele46.ViewModels
             IsDataLoading = true;
 
             WebClient wc = new WebClient();
-            user user = ((App)Application.Current).User;
-            if (user != null)
-            {
-                wc.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", user.email, user.password)));
-            }
+            //user user = ((App)Application.Current).User;
+            //if (user != null)
+            //{
+            //    wc.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", user.email, user.password)));
+            //}
             var taskAds = wc.DownloadStringTaskAsync(getAdsUrl(_allAdsPage));                        
 
             await TaskEx.WhenAll(App.GetCategoriesAsync(),

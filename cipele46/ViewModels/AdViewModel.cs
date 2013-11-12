@@ -92,7 +92,15 @@ namespace cipele46.ViewModels
         {
             get
             {
-                var category = App.GetCategoriesAsync().Result.FirstOrDefault(i => i.id == _model.category_id);
+                category category;
+                if (App.Categories != null)
+                {
+                    category = App.Categories.FirstOrDefault(i => i.id == _model.category_id);
+                }
+                else
+                {
+                    category = App.GetCategoriesAsync().Result.FirstOrDefault(i => i.id == _model.category_id);
+                }
                 if (category != null)
                     return category.name;
 
@@ -104,7 +112,12 @@ namespace cipele46.ViewModels
         {
             get
             {
-                var counties = App.GetCountiesAsync().Result;
+                var counties = App.Counties;
+                if (counties == null)
+                {
+                    counties = App.GetCountiesAsync().Result;
+                }
+                
                 var city = counties.Where(i => i.cities != null)
                                    .SelectMany(i => i.cities)
                                    .FirstOrDefault(i => i.id == _model.city_id);

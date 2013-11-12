@@ -22,6 +22,11 @@ namespace cipele46.Views
 
         }
 
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Views/MainPage.xaml", UriKind.Relative));
+        }
+
         private void OkAppBarButton_Click(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/Views/MainPage.xaml", UriKind.Relative));
