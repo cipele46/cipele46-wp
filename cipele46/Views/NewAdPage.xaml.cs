@@ -18,7 +18,9 @@ using System.Windows.Media;
 namespace cipele46.Views
 {
     public partial class NewAdPage : PhoneApplicationPage
-    {        
+    {
+        private bool isEdit = false;
+
         public NewAdPage()
         {
             InitializeComponent();
@@ -34,6 +36,20 @@ namespace cipele46.Views
         {
             base.OnNavigatedTo(e);
 
+            string editAd;
+            if (e.NavigationMode == NavigationMode.New
+                && NavigationContext.QueryString.TryGetValue("editAd", out editAd))
+            {
+                if (editAd == "true")
+                {
+                    App.NewAdViewModel.Ad = App.SelectedAd.Ad;
+                    PageTitle.Text = "uredi oglas";
+                    isEdit = true;
+                }
+            }
+
+            AdTypePicker.SelectedIndex = App.NewAdViewModel.AdType - 1;
+
             if (App.Categories == null)
                 App.GetCategoriesAsync();
 
@@ -41,18 +57,66 @@ namespace cipele46.Views
                 App.GetCountiesAsync();
 
             App.NewAdViewModel.Categories = new ObservableCollection<category>(App.Categories);
-            App.NewAdViewModel.Counties = new ObservableCollection<county>(App.Counties);
+            if (App.NewAdViewModel.Categories != null)
+            {
+                CategoriesPicker.ItemsSource = App.NewAdViewModel.Categories;
+                category category = null;
+                try
+                {
+                    category = App.Categories.Single(c => c.id == App.NewAdViewModel.CategoryId);
+                }
+                catch (Exception ex)
+                {
+                }
+                if (category != null)
+                    CategoriesPicker.SelectedIndex = CategoriesPicker.Items.IndexOf(category);
+                else
+                    CategoriesPicker.SelectedItem = CategoriesPicker.Items[0];
+            }
+
+            var counties = App.Counties;
+            if (counties == null)
+                counties = App.GetCountiesAsync().Result;
+
+            var city = counties.Where(i => i.cities != null)
+                               .SelectMany(i => i.cities)
+                               .FirstOrDefault(i => i.id == App.SelectedAd.Ad.city_id);
+
+            var county = counties.FirstOrDefault(i => i.cities != null 
+                && i.cities.Contains(city));
+
+            App.NewAdViewModel.Counties = new ObservableCollection<county>(counties);
+            CountyPicker.ItemsSource = App.NewAdViewModel.Counties;
+            if (county != null)
+                CountyPicker.SelectedIndex = CountyPicker.Items.IndexOf(county);
+            else
+                CountyPicker.SelectedItem = CountyPicker.Items[0];
+
+            if (App.Counties != null)
+            {
+                App.NewAdViewModel.Cities = new ObservableCollection<city>(county.cities);
+                if (App.NewAdViewModel.Cities != null)
+                {
+                    CityPicker.ItemsSource = App.NewAdViewModel.Cities;
+                    if (city != null)
+                        CityPicker.SelectedIndex = CityPicker.Items.IndexOf(city);
+                    else
+                        CityPicker.SelectedItem = CityPicker.Items[0];
+                }
+            }
         }
 
         private void NewAdAppBarButton_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(App.NewAdViewModel.Title))
+            if (String.IsNullOrWhiteSpace(TitleTextBox.Text)
+                || String.IsNullOrWhiteSpace(EmailTextBox.Text)
+                || String.IsNullOrWhiteSpace(DescriptionTextBox.Text)
+                || AdTypePicker.SelectedItem == null
+                || CategoriesPicker.SelectedItem == null
+                || CityPicker.SelectedItem == null
+                || CountyPicker.SelectedItem == null)
             {
-                return;
-            }            
-
-            if (String.IsNullOrWhiteSpace(App.NewAdViewModel.Email))
-            {
+                MessageBox.Show(ErrorStrings.NewAdDataMissing);
                 return;
             }
 
@@ -70,7 +134,7 @@ namespace cipele46.Views
                     phone = PhoneTextBox.Text
                 }
             };
-            App.NewAdViewModel.PostAnAd(postAnAd);
+            App.NewAdViewModel.PostAnAd(postAnAd, isEdit);
         }
 
         private void AddImageButton_Click(object sender, RoutedEventArgs e)
@@ -98,7 +162,6 @@ namespace cipele46.Views
                 CityPicker.ItemsSource = county.cities;
                 CityPicker.SelectedIndex = 0;
             }
-            
         }
 
         public class postAnAd

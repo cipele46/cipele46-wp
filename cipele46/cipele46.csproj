@@ -255,6 +255,7 @@
     <Content Include="ApplicationIcon.png" />
     <Content Include="Background.png" />
     <Content Include="Icons\appbar.myads.icon.png" />
+    <Content Include="Icons\appbar.refresh.rest.png" />
     <Content Include="Icons\appbar.sendmessage.rest.png" />
     <Content Include="Icons\appbar.share.rest.png" />
     <Content Include="Icons\phone.png" />

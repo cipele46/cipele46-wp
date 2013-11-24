@@ -20,6 +20,14 @@ namespace cipele46.ViewModels
         public string Title { get { return _model.title; } }
         public string Description { get { return _model.description; } }
 
+        public ad Ad
+        {
+            get
+            {
+                return _model;
+            }
+        }
+
         public string ImageUrl
         {
             get
@@ -196,6 +204,30 @@ namespace cipele46.ViewModels
         {
         }
 
-        
+        public async void CloseAd()
+        {
+            IsDataLoading = true;
+            IsDataLoaded = false;
+            var request = WebRequest.CreateHttp(Endpoints.PostAnAdUrl + "/" + _model.id);
+            request.Method = "DELETE";
+            request.ContentType = "application/json";
+            request.Accept = "application/json";
+            request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(string.Format("{0}:{1}", ((App)Application.Current).User.email, ((App)Application.Current).User.password)));
+
+            // Prepare web request...
+            var newStream = await request.GetRequestStreamAsync();
+            // Send the data.
+            newStream.Write(new byte[0], 0, 0);
+            newStream.Close();
+
+            var response = await request.GetResponseAsync() as HttpWebResponse;
+            IsDataLoading = false;
+            IsDataLoaded = true;
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                MessageBox.Show(ErrorStrings.CloseAdSuccessMessage);                
+                ((App)Application.Current).RootFrame.Navigate(new System.Uri("/Views/MainPage.xaml", System.UriKind.Relative));                
+            }
+        }        
     }
 }

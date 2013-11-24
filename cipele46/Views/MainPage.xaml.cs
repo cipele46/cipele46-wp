@@ -147,6 +147,7 @@ namespace cipele46
 
             App.SelectedAd = item;
             NavigationService.Navigate(new Uri("/Views/DetailsPage.xaml", UriKind.Relative));
+            (sender as ListBox).SelectedIndex = -1;
         }
 
         private void FilterTextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -182,6 +183,17 @@ namespace cipele46
         }
 
         private void Panorama_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            getPanoramaItemData();
+        }
+
+        private void RefreshAppBarButton_Click(object sender, EventArgs e)
+        {
+            App.ViewModel.ClearData();
+            getPanoramaItemData();
+        }
+
+        private void getPanoramaItemData()
         {
             if (Panorama.SelectedIndex == 0)
             {

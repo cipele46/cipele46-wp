@@ -14,5 +14,8 @@
         public static readonly string NoNetworkConnection = "Nije moguće uspostaviti vezu na Internet";
         public static readonly string NoAdsForFilters = "Nijedan oglas ne odgovara ovoj kombinaciji filtera";
         public static readonly string ForgotPasswordMessage = "Obnovu lozinke moguće je obaviti putem web stranice ";
+        public static readonly string NewAdDataMissing = "Molimo unesite sve potrebne podatke o oglasu";
+        public static readonly string CloseAdWarnMessage = "Sigurno želite zatvoriti ovaj oglas?";
+        public static readonly string CloseAdSuccessMessage = "Vaš oglas je zatvoren";
     }
 }

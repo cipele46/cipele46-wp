@@ -36,6 +36,12 @@ namespace cipele46.ViewModels
         private ObservableCollection<AdViewModel> _activeAds;
         private ObservableCollection<AdViewModel> _closedAds;
 
+        public MyAdsViewModel()
+        {
+            _favoriteAds = new ObservableCollection<AdViewModel>();
+            _activeAds = new ObservableCollection<AdViewModel>();
+            _closedAds = new ObservableCollection<AdViewModel>();
+        }
 
         public bool IsDataLoading
         {

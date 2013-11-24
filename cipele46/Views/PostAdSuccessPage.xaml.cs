@@ -17,6 +17,21 @@ namespace cipele46.Views
             InitializeComponent();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            string editAd;
+            if (e.NavigationMode == NavigationMode.New
+                && NavigationContext.QueryString.TryGetValue("editAd", out editAd))
+            {
+                if (editAd == "true")
+                {
+                    PageTitle.Text = "uredi oglas";
+                }
+            }
+        }
+
         private void ShareAppBarButton_Click(object sender, EventArgs e)
         {
 

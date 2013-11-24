@@ -191,6 +191,10 @@ namespace cipele46
 
                 return myAdsViewModel;
             }
+            set
+            {
+                myAdsViewModel = value;
+            }
         }
 
         private static NewAdViewModel newAdViewModel;

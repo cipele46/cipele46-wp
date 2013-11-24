@@ -67,7 +67,7 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="200"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Text="{Binding Title}" Grid.Row="0" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
+            <TextBlock Text="{Binding Title}" Grid.Row="0" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"></TextBlock>
             <TextBlock Text="Vaš E-mail" Grid.Row="1" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>
             <TextBox x:Name="EmailTextBox" Grid.Row="2"></TextBox>
             <TextBlock Text="Poruka" Grid.Row="3" Style="{StaticResource PhoneTextSubtleStyle}"></TextBlock>

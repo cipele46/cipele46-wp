@@ -7,7 +7,7 @@ namespace cipele46
 {
     public static class Endpoints
     {
-        //private static string apiUrl = "http://cipele46.org";
+        // static string apiUrl = "http://cipele46.org/api";
         private static string apiUrl = "http://staging.cipele46.org/api";
 
         public static readonly string AdsUrl = apiUrl + "/ads";

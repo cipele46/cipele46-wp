@@ -49,7 +49,7 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="CIPELE 46" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="novi oglas" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="novi oglas" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -61,15 +61,15 @@
             </Grid.RowDefinitions>
             
             <TextBlock Text="" Grid.Row="0" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
-            <TextBlock Text="Vaš oglas je uspješno objavljen" Grid.Row="1" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
-            <Button Content="pogledaj oglas" Grid.Row="2"></Button>
+            <TextBlock Text="Vaš oglas je uspješno objavljen" Grid.Row="1" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"></TextBlock>
+            <!--<Button Content="pogledaj oglas" Grid.Row="2"></Button>-->
             
         </Grid>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="OkAppBarButton" Click="OkAppBarButton_Click" IconUri="/Icons/appbar.check.rest.png" Text="ok"/>
-            <shell:ApplicationBarIconButton x:Name="ShareAppBarButton" Click="ShareAppBarButton_Click" IconUri="/Icons/appbar.share.rest.png" Text="podijeli"/>
+            <!--<shell:ApplicationBarIconButton x:Name="ShareAppBarButton" Click="ShareAppBarButton_Click" IconUri="/Icons/appbar.share.rest.png" Text="podijeli"/>-->
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
