@@ -78,12 +78,16 @@ namespace cipele46.Views
             if (counties == null)
                 counties = App.GetCountiesAsync().Result;
 
-            var city = counties.Where(i => i.cities != null)
-                               .SelectMany(i => i.cities)
-                               .FirstOrDefault(i => i.id == App.SelectedAd.Ad.city_id);
-
-            var county = counties.FirstOrDefault(i => i.cities != null 
+            city city = null;
+            county county = counties[0];
+            if (isEdit)
+            {
+                city = counties.Where(i => i.cities != null)
+                                   .SelectMany(i => i.cities)
+                                   .FirstOrDefault(i => i.id == App.SelectedAd.Ad.city_id);
+                county = counties.FirstOrDefault(i => i.cities != null
                 && i.cities.Contains(city));
+            }            
 
             App.NewAdViewModel.Counties = new ObservableCollection<county>(counties);
             CountyPicker.ItemsSource = App.NewAdViewModel.Counties;
@@ -119,6 +123,8 @@ namespace cipele46.Views
                 MessageBox.Show(ErrorStrings.NewAdDataMissing);
                 return;
             }
+
+            App.NewAdViewModel.AdType = AdTypePicker.SelectedIndex + 1;
 
             postAnAd postAnAd = new postAnAd
             {

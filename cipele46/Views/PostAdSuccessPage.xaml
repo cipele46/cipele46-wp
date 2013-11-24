@@ -61,7 +61,7 @@
             </Grid.RowDefinitions>
             
             <TextBlock Text="" Grid.Row="0" Style="{StaticResource PhoneTextLargeStyle}"></TextBlock>
-            <TextBlock Text="Vaš oglas je uspješno objavljen" Grid.Row="1" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"></TextBlock>
+            <TextBlock x:Name="PostAdSuccessMessage" Text="Hvala na oglasu. Pokušat ćemo pomoći. Kad oglas postane aktivan, dobit ćeš poruku na email." Grid.Row="1" Style="{StaticResource PhoneTextLargeStyle}" TextWrapping="Wrap"></TextBlock>
             <!--<Button Content="pogledaj oglas" Grid.Row="2"></Button>-->
             
         </Grid>

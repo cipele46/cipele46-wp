@@ -30,6 +30,11 @@ namespace cipele46.Views
                     PageTitle.Text = "uredi oglas";
                 }
             }
+
+            if (App.NewAdViewModel.AdType == 1)
+            {
+                PostAdSuccessMessage.Text = "Hvala što pomažeš. Nadamo se da će tvoj oglas usrećiti nekoga.";
+            }
         }
 
         private void ShareAppBarButton_Click(object sender, EventArgs e)
